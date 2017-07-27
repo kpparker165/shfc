@@ -22,6 +22,7 @@ python get-pip.py
 
 
 # Install django 1.3.1
+# Documentation located at https://django-document-tchinese.readthedocs.io/en/stable-1.3.x/intro/tutorial01.html
 pip install django~=1.3.1
 
 # move into the subfolder shfc and run

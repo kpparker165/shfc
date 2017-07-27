@@ -1,0 +1,12 @@
+<html>
+    <head>THIS IS THE HEAD</head>
+    <body>
+        {% block nav %}
+        <ul id="nav">
+            <li>{% block nav-home %}<a href="/">Home</a>{% endblock %}</li>
+            <li>{% block nav-about %}<a href="/admin/">login</a>{% endblock %}</li>
+        </ul>
+        {% endblock %}
+    </body>
+    <footer>This is the footer</footer>
+</html>
