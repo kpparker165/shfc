@@ -33,3 +33,6 @@ python manage.py runserver 127.0.0.1:8080
 
 
 
+https://jeffknupp.com/blog/2012/02/09/starting-a-django-project-the-right-way/
+
+
