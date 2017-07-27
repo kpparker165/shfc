@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block nav-boats %}<strong class="nav-active">Marine</strong>{% endblock %}
+
+{% block content %}
+
+<div class="col-sm-12">
+          
+  <div class="col-md-12 text-center">
+      <h3>Boat Checkout</h3>
+      <table class="table table-bordered">
+        <thead>
+        	<tr>
+        	  <th>Name</th>
+        	  <th>Type</th>
+        	  <th>Motorized</th>
+        	  <th>Location</th>
+        	  <th>Rental Fee</th>
+        	</tr>
+        </thead>
+        <tbody>
+        	<tr>
+        	  <td>18’ Crestliner Sportfish 1850 </td>
+        	  <td>Fishing Boat</td>
+        	  <td>135 hp Mercury Optimax</td>
+        	  <td>Slip at Chatfield Marina</td>
+        	  <td>$30 full day / $20 half day</td>
+        	</tr>
+        	<tr>
+        	  <td>16’ Lund WC-16</td>
+        	  <td>Fishing Boat</td>
+        	  <td>25 hp Mercury 4-stroke tiller motor</td>
+        	  <td>N/A</td>
+        	  <td>NO</td>
+        	</tr>
+        	<tr>
+        	  <td>14’ Mirrocraft</td>
+        	  <td>Fishing Boat</td>
+        	  <td>electric trolling motor</td>
+        	  <td>N/A</td>
+        	  <td>NO</td>
+        	</tr>
+        	<tr>
+        	  <td>Canoe 1</td>
+        	  <td>Canoe </td>
+        	  <td>Paddle</td>
+        	  <td>N/A</td>
+        	  <td>NO</td>
+        	</tr>
+        	<tr>
+        	  <td>Canoe 2</td>
+        	  <td>Canoe </td>
+        	  <td>Paddle</td>
+        	  <td>N/A</td>
+        	  <td>NO</td>
+        	</tr>
+        </tbody>
+      </table>
+  </div>	
+
+
+<div class="col-md-12">
+	
+<div class="col-sm-3">
+    <div class="thumbnail">
+      <img src="{{ STATIC_URL }}boat_crestliner.jpg" alt="...">
+      <div class="caption">
+        <h3>Crestlinter</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+</div>
+<div class="col-sm-3">
+    <div class="thumbnail">
+      <img src="{{ STATIC_URL }}boat_lund.jpg" alt="...">
+      <div class="caption">
+        <h3>Lund</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+</div>
+<div class="col-sm-3">
+    <div class="thumbnail">
+      <img src="{{ STATIC_URL }}boat_mirrocraft.jpg" alt="...">
+      <div class="caption">
+        <h3>Mirrocraft</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+</div>
+<div class="col-sm-3">
+    <div class="thumbnail">
+      <img src="{{ STATIC_URL }}boat_canoe.jpg" alt="...">
+      <div class="caption">
+        <h3>Canoe</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+</div>
+</div>
+	
+</div>
+{% endblock %}
+

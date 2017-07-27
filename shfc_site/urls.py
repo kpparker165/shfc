@@ -28,8 +28,8 @@ urlpatterns = patterns('',
     url(r"^archery/", direct_to_template, {"template": "archery/index.html"}),
     url(r"^boats/", direct_to_template, {"template": "boats/index.html"}),
     url(r"^membership/", direct_to_template, {"template": "membership/index.html"}),
-    url(r"^range/", direct_to_template, {"template": "range/index.html"}),
-
+    
+    url(r"^range/$", 'range.views.index'),
     url(r'^polls/$', 'polls.views.index'),
     url(r'^polls/(?P<poll_id>\d+)/$', 'polls.views.detail'),
     url(r'^polls/(?P<poll_id>\d+)/results/$', 'polls.views.results'),

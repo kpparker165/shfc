@@ -1,0 +1,60 @@
+<html>
+  <head><!-- THIS IS WHERE ALL THE SCRIPTS WILL BE HELD" -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="{{ STATIC_URL}}/bootstrap/js/bootstrap.min.js"></script>
+    <div class="col-sm-12 text-center">
+      
+      <h2>Skyline Hunting and Fishing</h2>
+    </div>
+  </head>
+  <body>
+      <dir class="container-fluid">
+        {% block nav %}
+        <ul class="nav nav-justified" id="nav">
+          <li>{% block nav-home %}<a href="/" class="btn btn-link" role="button">Home</a>{% endblock %}</li>
+          <li>{% block nav-archery %}<a href="/archery/" class="btn btn-link" role="button">Archery</a>{% endblock %}</li>
+          <li>{% block nav-boats %}<a href="/boats/" class="btn btn-link" role="button">Marine</a>{% endblock %}</li>
+          <li>{% block nav-membership %}<a href="/membership/" class="btn btn-link" role="button">Membership</a>{% endblock %}</li>
+          <li>{% block nav-range %}<a href="/range/" class="btn btn-link" role="button">Range</a>{% endblock %}</li>
+        </ul>
+        
+        <div class="col-sm-9">
+          
+        {% endblock %}
+        {% block content %}
+          THIS IS TEMP DATA
+        {% endblock %}
+        </div>
+        <div class="col-sm-3" style="background:lightgreen;">
+          {% block side-menu %}
+            <div class="row bg-warning">
+              ALERTS AND EVENTS
+            </div>
+            <div class="row">
+              This will populate from the database
+            </div>
+            <div class="row">
+              .
+            </div>
+            <div class="row">
+              .
+            </div>
+            <div class="row">
+              .
+            </div>
+            <div class="row">
+              .
+            </div>
+            <div class="row">
+              .
+            </div>
+          {% endblock %}
+        </div>
+      </dir>
+  </body>
+</html>
+
