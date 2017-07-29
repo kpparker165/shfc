@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
-{% block nav-range %}<strong class="nav-active">Range</strong>{% endblock %}
+
+{% block nav-home %}
+<li role="presentation">
+  <a href="/" class="btn btn-link" role="button">Home</a>
+</li>
+{% endblock %}
+
+{% block nav-range %}
+<li role="presentation" class="active">
+  <a href="/range/" class="btn btn-link" role="button">Range</a>
+</li>
+{% endblock %}
+
 
 {% block content %}
 <div class="col-sm-12">
@@ -12,14 +24,14 @@
         </p>
 	  </div>
 	  <div class="col-sm-4">
-	    <img src="{{ STATIC_URL }}shooting_house_long.jpg">
+	    <img src="{{ STATIC_URL }}shooting_house_long.jpg" class="img-thumbnail">
   	  </div>
   </dir>
 
   <dir class="row">
     <h3>100 Yard</h3>
     <div class="col-sm-4">
-      <img src="{{ STATIC_URL }}shooting_house.jpg">
+      <img src="{{ STATIC_URL }}shooting_house.jpg" class="img-thumbnail">
     </div>
     <div class="col-sm-8">
         <p>	
@@ -37,7 +49,7 @@
         </p>
 	  </div>
 	  <div class="col-sm-4">
-	    <img src="{{ STATIC_URL }}pistol_house.jpg">
+	    <img src="{{ STATIC_URL }}pistol_house.jpg" class="img-thumbnail">
   	  </div>
   </dir>  
 </div>
@@ -45,7 +57,7 @@
   <dir class="row">
     <h3>Trap and Skeet</h3>
     <div class="col-sm-4">
-      <img src="{{ STATIC_URL }}shooting_trap.jpg">
+      <img src="{{ STATIC_URL }}shooting_trap.jpg" class="img-thumbnail">
     </div>
     <div class="col-sm-8">
         <p>	

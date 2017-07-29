@@ -1,53 +1,47 @@
 {% extends "base.html" %}
+{% block nav-home %}
+<li role="presentation">
+  <a href="/" class="btn btn-link" role="button">Home</a>
+</li>
+{% endblock %}
 
-{% block nav-membership %}<strong class="nav-active">Membership</strong>{% endblock %}
+{% block nav-membership %}
+<li role="presentation" class="active">
+  <a href="/membership/" class="btn btn-link" role="button">Membership</a>
+</li>
+{% endblock %}
+
 
 {% block content %}
 <div class="col-sm-12">
 <div class="row">
 	
+  <div class="col-sm-12 bg-danger text-center">
+    <b>
+      Skyline Hunting & Fishing is private - You must be an employee or retiree of Lockheed Martin Company, United Launch Alliance (ULA), or an affiliated Defense Dept contractor for eligibility for membership
+    </b>
+  </div>
   <div class="col-sm-12">
 	  <h3>How to Join</h3>
-	  <p>
-	 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu.
-	  </p>
 	  <ol>
-	    <li>venenatis</li>
-	    <li>venenatis</li>
-	    <li>venenatis</li>
-	    <li>venenatis</li>
-	    <li>venenatis</li>
-	    <li>venenatis</li>
+	    <li>An application for membership </li>
+	    <li>A liability waiver</li>
+	    <li>A completed range access test</li>
+	    <li>Proof of firearms training (more below)</li>
+	    <li>Membership dues</li>
 	  </ol>
-  </div>
-  <div class="col-sm-12 text-center">
-    <h3>Contact</h3>
-  	<table class="table table-bordered">
-      <thead>
-      	<tr>
-      	  <th>Name</th>
-      	  <th>Phone</th>
-      	  <th>Email</th>
-      	</tr>
-      </thead>
-      <tbody>
-      	<tr>
-      	  <td>foo bar</td>
-      	  <td>123-456-7899</td>
-      	  <td>someting@something.org</td>
-      	</tr>
-      	<tr>
-      	  <td>foo bar</td>
-      	  <td>123-456-7899</td>
-      	  <td>someting@something.org</td>
-      	</tr>
-      	<tr>
-      	  <td>foo bar</td>
-      	  <td>123-456-7899</td>
-      	  <td>someting@something.org</td>
-      	</tr>
-      </tbody>
-    </table>
+    <p>
+      Gather these completed documents and a good phone number for our membership person to contact you. Once all of your paperwork is ready, contact John LaRue at M/S V4912 or call him at 720-937-5954 for more information.  John will contact you to set up a range orientation where you will submit your paperworkand give you your membership badge.
+    </p>
+
+    <h3>Acceptable Proof of Firearms Training</h3>
+    <p>
+      Acceptable proof of firearms training can include a CCW permit, DD-214, Hunter Education card, a certificate from a competition, certificate of completion from an NRA course, etc. 
+    <p>
+      If you don’t have firearms training of any kind, the club periodically offers a fairly short “home firearm safety” certification course in our clubhouse out by the softball fields (map below). If you want to take a more thorough training course, the club offers training to get your Hunter’s Education card and it offers a couple of NRA certification courses, but both of those are multiple day endeavors. Dates for these are listed on the Events Calendar.
+    </p>  
+    </p>
+    
   </div>
 </div>
 </div>

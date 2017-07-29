@@ -112,8 +112,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/student/shfc/shfc_site/templates/',
-    '/home/student/shfc/shfc_site/templates/polls/',
+    os.path.join(os.path.dirname(__file__), 'templates'),
+    os.path.join(os.path.dirname(__file__), 'templates/polls')
+    # '/home/student/shfc/shfc_site/templates/',
+    # '/home/student/shfc/shfc_site/templates/polls/',
 )
 
 INSTALLED_APPS = (
@@ -129,6 +131,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     # Poll App
     'polls',
+    'events',
+    'boats',
 )
 
 # A sample logging configuration. The only tangible logging

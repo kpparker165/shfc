@@ -1,0 +1,52 @@
+body{
+	background-image: url("../elk.jpg"); 
+	background-repeat: no-repeat;
+	padding-top: 60px;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+	/*background-color: #EFDECD;*/
+}
+html{
+    height: 100%;
+
+}
+
+#calendar_container{
+    background: rgba(239, 239, 239,0.8);
+
+}
+#main_container{
+    background: rgba(239, 224, 205, 0.9);
+
+}
+.pre-scrollable {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+#alert_feed {
+    position: fixed; /* Set the navbar to fixed position */
+    top: 60; /* Position the navbar at the top of the page */
+    right:0;
+
+}
+
+/* The navigation bar */
+#navbar {
+    background-color: #848191;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 9999;
+    height: 50px;
+}
+
+/* Links inside the navbar */
+#navbar a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}

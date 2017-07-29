@@ -21,14 +21,16 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.simple import direct_to_template
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r"^$", direct_to_template, {"template": "index.html"}),
-    url(r"^archery/", direct_to_template, {"template": "archery/index.html"}),
-    url(r"^boats/", direct_to_template, {"template": "boats/index.html"}),
-    url(r"^membership/", direct_to_template, {"template": "membership/index.html"}),
-    
+    url(r"^$", "home.views.index"),
+    url(r"^archery/", 'archery.views.index'),
+    url(r"^boats/$", 'boats.views.index'),
+    url(r"^boats/data/$", 'boats.views.schedule'),
+    url(r"^membership/$", 'membership.views.index'),
+
     url(r"^range/$", 'range.views.index'),
     url(r'^polls/$', 'polls.views.index'),
     url(r'^polls/(?P<poll_id>\d+)/$', 'polls.views.detail'),
