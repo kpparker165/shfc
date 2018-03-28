@@ -1,0 +1,122 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% block js %}
+
+    
+  <script type="text/javascript"> 
+    function editPageContents() {
+    var about = document.getElementById("about");
+    var facilities = document.getElementById("facilities");
+    var general = document.getElementById("general");
+    var update_form = document.getElementById("updateForm");
+      if (about.style.display === "none") {
+        about.style.display = "inline";
+        facilities.style.display = "inline";
+        general.style.display = "inline";
+        update_form.style.display = "none";
+      } else {
+        about.style.display = "none";
+        facilities.style.display = "none";
+        general.style.display = "none";
+        update_form.style.display = "inline";
+
+      }    
+    };
+  </script>
+
+{% endblock js%}
+
+
+<div class="row">
+  <div class="col-12 text-center">
+    <h3>Home</h3>
+    {% if user.is_authenticated %}
+      <button class="btn btn-warning" onclick="editPageContents()">Edit Page</button>
+      <br>
+      <br>
+
+    {% endif%}
+  </div>
+</div>
+<div class="row" >
+	<div class="col-12 customDivs" id="about">
+    <h3>About</h3>
+      {% if information.about_section %}
+        <p>
+          {{ information.about_section |linebreaks }}
+        </p>
+      {% else %}
+        <p> </p>
+      {% endif %}
+  </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-5 customDivs" id="facilities">
+      <h3>Facilities</h3>
+        {% if information.facilities_section %}
+          <p>
+            {{ information.facilities_section |linebreaks }}
+          </p>
+        {% else %}
+          <p> </p>
+        {% endif %}
+    </div>
+    <div class="col-2"></div>
+    <div class="col-5 customDivs" id="general">
+      <h3>General</h3>
+        {% if information.general_section %}
+          <p>
+            {{ information.general_section |linebreaks }}
+          </p>
+        {% else %}
+          <p> </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+  
+<div class="col-12 customDivs" id="updateForm" style="display:none">
+  <form action={% url 'shfc:updateHomePage' %} method="post">
+    {% csrf_token %}
+    <!-- About -->
+    <div class="form-group text-center">
+      <h3>Update About Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="aboutDescription">Description</label>
+      <textarea name="about_description" class="form-control" id="aboutDescription" rows="15" required>
+          {{ information.about_section}}
+      </textarea>
+    </div>
+    <!-- Facilities -->
+    <div class="form-group text-center">
+      <h3>Update Facilities Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="facilitiesDescription">Description</label>
+      <textarea name="facilities_description" class="form-control" id="facilitiesDescription" rows="15" required>
+        {{ information.facilities_section}}
+      </textarea>
+    </div>
+    <!-- General -->
+    <div class="form-group text-center">
+      <h3>Update General Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="generalDescription">Description</label>
+      <textarea name="general_description" class="form-control" id="generalDescription" rows="15" required>
+        {{ information.general_section}}
+      </textarea>
+    </div>
+    <div class="form-group text-center">
+      <input type="submit" value="Update Home Page" class="btn btn-success"/>
+    </div>
+  </form>
+</div>
+</div>
+ 
+{% endblock %}

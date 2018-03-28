@@ -1,0 +1,266 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Range{% endblock %}
+
+{% block content %}
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    
+    $('#RSOcalendar').fullCalendar({
+        dayClick: function(date, jsEvent, view) {
+            document.getElementById('rsoStartDate').value = date.format()
+        },
+        events: [ 
+            {% for i in rso_calendar_data %}
+        {
+                start:"{{i.start_date | date:'Y-m-d'}}",
+                end:"{{i.end_date | date:'Y-m-d' }}",
+                title:"{{i.rso_title}}",
+
+        },
+            {% endfor%}
+        
+        
+
+        ]
+
+    });
+
+});
+
+</script>
+{% for i in rso_calendar_data %}
+{{i.start_date}}
+{{i.end_date}}
+{{i.rso_title}}
+{% endfor%}
+
+
+
+
+
+<div class="col-12 text-center"><h2>Ranges</h2></div>
+
+<div class="row">
+    
+    <div class="col-12 bg-danger text-center customDivs">
+        <b>All Firearm Ranges are open from one half hour before sunrise until 10 PM EXCEPT during normal working hours Monday through Friday* (7 AM to 4 PM) when the ranges will be closed.
+            <br>
+            <br>
+            Note, since normal working hours do not include "Off Fridays (track A)" and LMSSC designated Holidays, all ranges will be open from one half hour before sunrise until 10 PM on these days also (RSO must be active/on site - see RSO Calendar).
+            <br>
+            <br>
+            The Archery (NO FIREARMS) Range is open at all times. SHFC members who have NOT completed the MANDATORY Safety Training & Testing and received the 2017 badge will NOT be allowed access to the range As of April 1 2017. 
+            <br>
+            <br>
+            We no longer access the ranges though the Lockheed Martin gate! Skyline Hunting & Fishing is a private club - You must be an employee or retiree of Lockheed Martin Company, United Launch Alliance (ULA), or an affiliated Defense Dept contractor for eligibility for membership.
+        </b>
+    </div>
+</div>
+
+
+<br>
+
+<div class="row">      
+    <div class="col-4 customDivs" >
+    {% if user.is_authenticated %}
+    <form action={% url 'shfc:updateRSOCalendar' %} method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="rsoStartDate">Date / Time</label>
+            <input name="rso_startDate" class="form-control" placeholder="yyyy-mm-dd" type="text" id="rsoStartDate" required>
+        </div>
+        <div class="form-group">
+            <label for="rsoStartDate">Start Time</label>
+            <select name="rso_startTime" class="form-control" id="rsoStartDate">
+                <option value="07:00">7:00AM</option>
+                <option value="07:30">7:30AM</option>
+                <option value="08:00">8:00AM</option>
+                <option value="08:30">8:30AM</option>
+                <option value="09:00">9:00AM</option>
+                <option value="09:30">9:30AM</option>
+                <option value="10:00">10:00AM</option>
+                <option value="10:30">10:30AM</option>
+                <option value="11:00">11:00AM</option>
+                <option value="11:30">11:30AM</option>
+                <option value="12:00">12:00AM</option>
+                <option value="12:30">12:30AM</option>
+                <option value="13:00">1:00AM</option>
+                <option value="13:30">1:30AM</option>
+                <option value="14:00">2:00AM</option>
+                <option value="14:30">2:30AM</option>
+                <option value="15:00">3:00AM</option>
+                <option value="15:30">3:30AM</option>
+                <option value="16:00">4:00AM</option>
+                <option value="16:30">4:30AM</option>
+                <option value="17:00">5:00AM</option>
+                <option value="17:30">5:30AM</option>
+                <option value="18:00">6:00AM</option>
+                <option value="18:30">6:30AM</option>
+                <option value="19:00">7:00AM</option>
+                <option value="19:30">7:30AM</option>
+                <option value="20:00">8:00AM</option>
+                <option value="20:30">8:30AM</option>
+                <option value="21:00">9:00AM</option>
+                <option value="21:30">9:30AM</option>
+                <option value="22:00">10:00AM</option>
+                <option value="22:30">10:30AM</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rsoEndTime">End Time</label>
+            <select name="rso_endTime" class="form-control" id="rsoEndTime">
+                <option value="07:00">7:00AM</option>
+                <option value="07:30">7:30AM</option>
+                <option value="08:00">8:00AM</option>
+                <option value="08:30">8:30AM</option>
+                <option value="09:00">9:00AM</option>
+                <option value="09:30">9:30AM</option>
+                <option value="10:00">10:00AM</option>
+                <option value="10:30">10:30AM</option>
+                <option value="11:00">11:00AM</option>
+                <option value="11:30">11:30AM</option>
+                <option value="12:00">12:00AM</option>
+                <option value="12:30">12:30AM</option>
+                <option value="13:00">1:00AM</option>
+                <option value="13:30">1:30AM</option>
+                <option value="14:00">2:00AM</option>
+                <option value="14:30">2:30AM</option>
+                <option value="15:00">3:00AM</option>
+                <option value="15:30">3:30AM</option>
+                <option value="16:00">4:00AM</option>
+                <option value="16:30">4:30AM</option>
+                <option value="17:00">5:00AM</option>
+                <option value="17:30">5:30AM</option>
+                <option value="18:00">6:00AM</option>
+                <option value="18:30">6:30AM</option>
+                <option value="19:00">7:00AM</option>
+                <option value="19:30">7:30AM</option>
+                <option value="20:00">8:00AM</option>
+                <option value="20:30">8:30AM</option>
+                <option value="21:00">9:00AM</option>
+                <option value="21:30">9:30AM</option>
+                <option value="22:00">10:00AM</option>
+                <option value="22:30">10:30AM</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rso">User</label>
+            <input type="text" class="form-control" id="announcementUser"  value="{{user.username}}" readonly/>
+            <input type="text" name="rso_user" class="invisible" value="{{user.pk}}" readonly/>                 
+        </div>
+        <div class="form-group text-center">
+            <input type="submit" value="Schedule RSO Duity" class="btn btn-success"/>
+        </div>
+    </form>
+    {% endif %}
+    </div>
+    <div class="col-8 text-center" id="calendar_container" >
+        <h3>RSO Calendar</h3>
+        <div id='RSOcalendar'></div>
+        <br>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h3>200/300 Yard</h3>
+        </div>
+        <div class="col-12">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            </p>
+        </div>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h3>100 Yard</h3>
+        </div>
+        <div class="col-12">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            </p>
+        </div>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h3>25/50 Yard</h3>
+        </div>
+        <div class="col-12">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            </p>
+        </div>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
+        </div>
+    </div>
+
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h3>Trap and Skeet</h3>
+        </div>
+        <div class="col-12">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            </p>
+        </div>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h3>Walking Archery</h3>
+        </div>
+        <div class="col-12">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            </p>
+        </div>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h3>Standing Archery</h3>
+        </div>
+        <div class="col-12">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            </p>
+        </div>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

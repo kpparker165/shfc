@@ -1,0 +1,19 @@
+/*body{
+	background-image: url("../elk.jpg"); 
+	background-repeat: no-repeat;
+	padding-top: 60px;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}
+html{
+    height: 100%;
+
+}*/
+
+#calendar_container{
+    background: rgba(239, 239, 239,0.8);
+
+}
+
+
