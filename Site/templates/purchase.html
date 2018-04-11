@@ -2,83 +2,334 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}SHFC-Range{% endblock %}
-
 {% block content %}
+{% block js %}
 
+<script type="text/javascript"> 
+    function showPurchasingContacts() {
+    var purchasingContacts = document.getElementById("purchasingContacts");
+    var purchasing = document.getElementById("purchasing");
+    var powderValley = document.getElementById("powderValley");
+    // var update_form = document.getElementById("updateForm");
+      if (purchasingContacts.style.display === "none") {
+        purchasingContacts.style.display="inline"
+        purchasing.style.display="none"
+        powderValley.style.display="none"
+        // update_form.style.display = "none";
+      }    
+    };
+    function showPurchases() {
+    var purchasingContacts = document.getElementById("purchasingContacts");
+    var purchasing = document.getElementById("purchasing");
+    var powderValley = document.getElementById("powderValley");
+    // var update_form = document.getElementById("updateForm");
+      if (purchasing.style.display === "none") {
+        purchasingContacts.style.display="none"
+        purchasing.style.display="inline"
+        powderValley.style.display="none"
+        // update_form.style.display = "none";
+      }    
+    };
+    function showPowderValley() {
+    var purchasingContacts = document.getElementById("purchasingContacts");
+    var purchasing = document.getElementById("purchasing");
+    var powderValley = document.getElementById("powderValley");
+    // var update_form = document.getElementById("updateForm");
+      if (powderValley.style.display === "none") {
+        purchasingContacts.style.display="none"
+        purchasing.style.display="none"
+        powderValley.style.display="inline"
+        // update_form.style.display = "none";
+      }    
+    };
+    // function showPowderValley()() {
+    // var purchasingContacts = document.getElementById("purchasingContacts");
+    // // var update_form = document.getElementById("updateForm");
+    //   if (purchasingContacts.style.display === "none") {
+    //     purchasingContacts.style.display="inline"
+    //     // update_form.style.display = "none";
+    //   } else {
+    //     purchasingContacts.style.display="none"
+    //     // update_form.style.display = "inline";
+
+    //   }    
+    // };
+
+</script>
+
+<script type="text/javascript">
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+
+
+</script>
+
+{% endblock js%}
 <div class="row">
 	<div class="col-12 text-center"><h2>Purchasing</h2></div>
 </div>
 
-<div class="row">
-    
-    <div class="col-12 bg-danger text-center customDivs">
-    	The club has four purchasing agents responsible for processing FFL orders. All orders must be processed through one of the firearms agents listed below.
-    	<br>
-		Members are prohibited from directly handling the FFL. On-line auctions require coordination with a purchasing agent prior to bidding. Firearm purchases shall follow the Skyline Hunting and Fishing Purchasing Policy and Practices below
-	</div>
+<div class="row text-center">
+    <div class="col-4">
+        <button class="btn btn-info" onclick="showPurchasingContacts()">Contacts</button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-info" onclick="showPurchases()">Firearms / Accessories / Accounts</button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-info" onclick="showPowderValley()">Powder Valley Order</button>
+    </div>
 </div>
 <br>
 
+<div id="purchasingContacts" style="display:inline">
+  <div class="row">
+      <div class="col-12 bg-danger text-center customDivs">
+      	The club has four purchasing agents responsible for processing FFL orders. All orders must be processed through one of the firearms agents listed below.
+      	<br>
+  		  Members are prohibited from directly handling the FFL. On-line auctions require coordination with a purchasing agent prior to bidding. Firearm purchases shall follow the Skyline Hunting and Fishing Purchasing Policy and Practices below
+  	 </div>
+  </div>
+  <br>
 
-
-<div class="row">
-	
-	<div class="col-6 customDivs">
-	<h3>Purchasing Agents</h3>
-	<div class="col-12">
-		<ul class="list-unstyled">
-  		<li>John Parker
-  			<ul>
-  				<li>(Class 1 & Class 3 Firearms & Accessories)</li> 
-  				<li>303-977-5268</li>
-  			</ul>
-  		</li>
-  		<li>
-  			Dave Mulholland
-  			<ul>
-  				<li>(Class 1 Firearms & Accessories)</li>
-  				<li>303-977-3674</li>	
-  			</ul> 
-  		</li>
-  		<li>
-  			John DeAngelis
-  			<ul>
-  				<li>(Redding)</li>
-  			</ul>
-  		</li>
-  		<li>
-  			Bill Lhotta
-  			<ul>
-  				<li>(Powder Valley)</li>
-  			</ul>
-  		</li>
-  		<li>
-  			John LaRue 
-  			<ul>
-  				<li>(Class 3 Firearms & Accessories, & Firearms Transfers)</li>
-  				<li>303-977-9807</li>
-  			</ul>
-  		</li>
-	</ul>
-	</div>
-	</div>
-
-
-<!-- 		<div class="col-12">
-			<img src="{% static 'images/logos/logo-rsr.png' %}" style="max-width:100%; max-height:100%;">
-		</div>
-		<div class="col-12">
-			<img src="{% static 'images/logos/logo-zev.png' %}" style="max-width:100%; max-height:100%;">
-		</div>
-		<div class="col-12">
-			<img src="{% static 'images/logos/logo-magpul.png' %}" style="max-width:100%; max-height:100%;">
-		</div>
-		<div class="col-12">
-			<img src="{% static 'images/logos/logo-sportssouth.jpeg' %}" style="max-width:100%; max-height:100%;">
-		</div>
-		<div class="col-12">
-			<img src="{% static 'images/logos/logo-davidsons.png' %}" style="max-width:100%; max-height:100%;">
-		</div> -->
+  <div class="row">
+  	<div class="col-12 customDivs">
+    	<h3>Purchasing Agents</h3>
+    	<div class="col-12">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-dark">John Parker
+            <ul>
+              <li>(Class 1 & Class 3 Firearms & Accessories)</li> 
+              <li>303-977-5268</li>
+            </ul>
+          </li>
+          <li class="list-group-item list-group-item-dark">
+            Dave Mulholland
+            <ul>
+              <li>(Class 1 Firearms & Accessories)</li>
+              <li>303-977-3674</li> 
+            </ul> 
+          </li>
+          <li class="list-group-item list-group-item-dark">
+            John DeAngelis
+            <ul>
+              <li>(Redding)</li>
+            </ul>
+          </li>
+          <li class="list-group-item list-group-item-dark">
+            Bill Lhotta
+            <ul>
+              <li>(Powder Valley)</li>
+            </ul>
+          </li>
+          <li class="list-group-item list-group-item-dark">
+            John LaRue 
+            <ul>
+              <li>(Class 3 Firearms & Accessories, & Firearms Transfers)</li>
+              <li>303-977-9807</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div id="purchasing" style="display:none">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h4>Accounts</h4>
+    </div>
+    <div class="col-4">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-dark">
+          <a href="http://www.amsecusa.com/"   target="_blank"><b>American Security</b>
+          </a>
+        </li>    
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.blueridgeknives.com/"   target="_blank"><b>Blue Ridge Knives</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.crowshootingsupply.com/DefaultResp.aspx"   target="_blank"><b>Crow Shooting Supplies</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.forsterproducts.com/"   target="_blank"><b>Forester Products</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.ftknox.com/"   target="_blank"><b>Fort Knox Valuts</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="http://www.glockstore.com/"   target="_blank"><b>Glock Store</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.hsprecision.com/shop2/"   target="_blank"><b>H-S Precision</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="http://mynssa.nssa-nsca.org/"   target="_blank"><b>NSSA</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.powdervalleyinc.com/"   target="_blank"><b>Powder Valley</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="http://www.redding-reloading.com/"   target="_blank"><b>Redding Reloading</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.rsrgroup.com/"   target="_blank"><b>Rsr Group</b>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <a href="https://www.sogknives.com/"   target="_blank"><b>SOG Knives</b>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-8">
+      <img src="{% static 'images/logos/logo-sheet.jpg' %}" class="w-100">
+    </div>
+  </div>
+</div>
+
+<div id="powderValley" style="display:none">
+  <div class="col-12 customDivs">
+    <div class="col-12 text-center">
+      <h4>Powder Valley Order</h4>
+    </div>
+    <div class="col-12" style="overflow: auto; height:300px">
+      <table class="table table-striped table-bordered table-dark">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Item Number</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Pounds of Powder</th>
+            <th>Website Unit Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="word-wrap">999999</td>
+            <td style="word-wrap">Kyle</td>
+            <td style="word-wrap">Parker</td>
+            <td style="word-wrap">FEDGM215M</td>
+            <td style="word-wrap">FED GM215M LARGE RIFLE MAG MATCH PRIMERS </td>
+            <td style="word-wrap">1</td>
+            <td style="word-wrap">12</td>
+            <td style="word-wrap">$40.99</td>
+          </tr>
+          <tr>
+            <td style="word-wrap">999999</td>
+            <td style="word-wrap">Kyle</td>
+            <td style="word-wrap">Parker</td>
+            <td style="word-wrap">WSC3006SFU250</td>
+            <td style="word-wrap">30-06 SPRINGFIELD - PER 250 </td>
+            <td style="word-wrap">8</td>
+            <td style="word-wrap">1</td>
+            <td style="word-wrap">$25.99</td>
+          </tr>
+          <tr>
+            <td style="word-wrap">1102232</td>
+            <td style="word-wrap">Joe</td>
+            <td style="word-wrap">Smith</td>
+            <td style="word-wrap">WSC3006SFU250</td>
+            <td style="word-wrap">30-06 SPRINGFIELD - PER 250 </td>
+            <td style="word-wrap">8</td>
+            <td style="word-wrap">25</td>
+            <td style="word-wrap">$25.99</td>
+          </tr>
+          <tr>
+            <td style="word-wrap">123556</td>
+            <td style="word-wrap">John</td>
+            <td style="word-wrap">Doe</td>
+            <td style="word-wrap">WSC3006SFU250</td>
+            <td style="word-wrap">30-06 SPRINGFIELD - PER 250 </td>
+            <td style="word-wrap">8</td>
+            <td style="word-wrap">1</td>
+            <td style="word-wrap">$25.99</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div class="col-12 text-center">
+      <button class="btn btn-warning" onclick="exportTableToCSV('Powder_Valley_Order.csv')">Export Order to CSV</button>
+    </div>
+    <br>
+    <div class="col-12 text-center">
+      <form>
+        <h4>Add your powder to the order!</h4>
+        <div class="form-inline form-group">
+            <input type="text" class="form-control col-4 text-uppercase" id="inlineFormInputName2" placeholder="Item Number">
+            <input type="text" class="form-control col-8" id="inlineFormInputName2" placeholder="Description">
+        </div>
+        <div class="form-inline form-group">
+          <input type="number" min="0"class="form-control col-4" id="inlineFormInputName2" placeholder="Weight lbs ex. 8">
+          <input type="number" min="0" class="form-control col-4" id="inlineFormInputName2" placeholder="Quantity ex. 3">
+          <input type="number" step="0.01" min="0" class="form-control col-4" id="inlineFormInputName2" placeholder="Price Per Unit">
+          <input type="text" class="form-control col-4" id="userNameField" value="{{user.username}}" readonly>
+        </div>
+        <div class="col-12">
+          <input type="submit" value="Submit Powder Order" class="form-control btn btn-success"/>
+        </div>
+      </form>
+    </div> 
+    <br>
+    
+  </div>
+
+</div>
+
+
 
 {% endblock %}

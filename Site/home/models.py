@@ -74,6 +74,34 @@ class UpdateHomePage(models.Model):
   facilities_section = models.TextField()
   general_section = models.TextField()
 
+  class Meta:
+        permissions=(
+             ("edit_home_page","Can edit home page"),
+        )
+
+class UpdateRangesPage(models.Model):
+  range_top_notification = models.TextField()
+  range_200_300_section = models.TextField()
+  range_100_section = models.TextField()
+  range_25_50_section = models.TextField()
+  range_trap_section = models.TextField()
+  range_archery_standing_section = models.TextField()
+  range_archery_walking_section = models.TextField()
+  class Meta:
+        permissions=(
+             ("edit_ranges_page","Can edit ranges page"),
+        )
+
+class UpdatePurchasPage(models.Model):
+  about_section = models.TextField()
+  facilities_section = models.TextField()
+  general_section = models.TextField()
+
+  class Meta:
+        permissions=(
+             ("edit_home_page","Can edit home page"),
+        )
+
 class NewAnnouncement(models.Model):
   ANNOUNCEMENT_TYPES = (
         ('danger', 'Critical'),
@@ -85,11 +113,19 @@ class NewAnnouncement(models.Model):
   announcement_description = models.TextField(blank=False)
   announcement_date = models.DateTimeField(auto_now=True, blank=False)
   announcement_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
+  class Meta:
+        permissions=(
+             ("edit_announcements","Can edit announcements"),
+        )
 
 class UpdateRSOCalendar(models.Model):
   rso_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
-  rso_title = models.CharField(max_length=20, default="RSO Duity")
   start_date = models.DateTimeField(blank=False)
   end_date = models.DateTimeField(blank=False)
+  class Meta:
+        permissions=(
+             ("edit_rso_calendar","Can edit rso calendar"),
+             ("edit_rso_calendar_admin","Can edit calendar_admin"),
+        )
 
  

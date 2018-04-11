@@ -4,64 +4,98 @@
 {% block title %}SHFC-Range{% endblock %}
 
 {% block content %}
-<div>something</div>
-<div class="col-sm-12">
-
-  <div class="col-sm-12" id="calendar_container" >
-    <div id='calendar'></div>
-  </div>
-          
-  <div class="col-md-12 text-center">
-      <h3>Boat Checkout</h3>
-      <table class="table table-bordered">
-        <thead>
-        	<tr>
-        	  <th>Name</th>
-        	  <th>Type</th>
-        	  <th>Motorized</th>
-        	  <th>Location</th>
-        	  <th>Rental Fee</th>
-        	</tr>
-        </thead>
-        <tbody>
-        	<tr>
-        	  <td>18’ Crestliner Sportfish 1850 </td>
-        	  <td>Fishing Boat</td>
-        	  <td>135 hp Mercury Optimax</td>
-        	  <td>Slip at Chatfield Marina</td>
-        	  <td>$30 full day / $20 half day</td>
-        	</tr>
-        	<tr>
-        	  <td>16’ Lund WC-16</td>
-        	  <td>Fishing Boat</td>
-        	  <td>25 hp Mercury 4-stroke tiller motor</td>
-        	  <td>N/A</td>
-        	  <td>NO</td>
-        	</tr>
-        	<tr>
-        	  <td>14’ Mirrocraft</td>
-        	  <td>Fishing Boat</td>
-        	  <td>electric trolling motor</td>
-        	  <td>N/A</td>
-        	  <td>NO</td>
-        	</tr>
-        	<tr>
-        	  <td>Canoe 1</td>
-        	  <td>Canoe </td>
-        	  <td>Paddle</td>
-        	  <td>N/A</td>
-        	  <td>NO</td>
-        	</tr>
-        	<tr>
-        	  <td>Canoe 2</td>
-        	  <td>Canoe </td>
-        	  <td>Paddle</td>
-        	  <td>N/A</td>
-        	  <td>NO</td>
-        	</tr>
-        </tbody>
-      </table>
-  </div>	
+<div class="row">
+    <div class="col-12 text-center">
+        <h1>Marine</h1>
+    </div>
+    <div class="col-12 customDivs">
+        <br>
+        <div class="col-12 text-center">
+            <h3>Member Boat Checkout</h3>
+        </div>
+        <br>
+        <div class="col-12">
+            Members and guests shall sign a release and waiver of liabilities and return it to the boating chairman prior to checking out a boat. 
+            <br>
+            <a href="{% static 'documents/marine/Facilities - Skyline Hunting and Fishing Club - 2018 Liability-Waiver Form --  boat usage  (MEMBER).pdf' %}" download>
+                2018 Liability-Waiver Form --  boat usage  (MEMBER)
+            </a>
+            <br>
+            <a href="{% static 'documents/marine/Facilities - Skyline Hunting and Fishing Club - 2018 Liability-Waiver Form --  boat usage (GUEST).pdf' %}" download>
+                2018 Liability-Waiver Form --  boat usage (GUEST)
+            </a>
+        </div>
+        <br>
+        <table class="table table-striped table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Motorized</th>
+                    <th>Location</th>
+                    <th>Rental Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>18’ Crestliner Sportfish 1850 </td>
+                    <td>Fishing Boat</td>
+                    <td>135 hp Mercury Optimax</td>
+                    <td>Slip at Chatfield Marina</td>
+                    <td>$30 full day / $20 half day</td>
+                </tr>
+                <tr>
+                    <td>16’ Lund WC-16</td>
+                    <td>Fishing Boat</td>
+                    <td>25 hp Mercury 4-stroke tiller motor</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>14’ Mirrocraft</td>
+                    <td>Fishing Boat</td>
+                    <td>electric trolling motor</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>Canoe 1</td>
+                    <td>Canoe </td>
+                    <td>Paddle</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>Canoe 2</td>
+                    <td>Canoe </td>
+                    <td>Paddle</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div> 
+    <div class="col-12">
+        <a href="{% static 'documents/marine/2018 Crestliner Checkout form_R0.pdf' %}" download>
+            Crestliner Checkout Form
+        </a>
+        <br>
+        <a href="{% static 'documents/marine/SHFC Crestliner checklist.pdf' %}" download>
+            Crestliner Checklist
+        </a>
+        <br>
+        <a href="{% static 'documents/marine/SHFC Lund,Mirrocraft checklist.pdf' %}" download>
+            Lund, Mirrocraft Checklist
+        </a>
+        <br>
+        <a href="{% static 'documents/marine/2018 Lund, Mirrocraft Checkout form.pdf' %}" download>
+            Lund, Mirrocraft Checkout Form
+        </a>
+        <br>
+        
+        
+    </div>   
 </div>
 
 {% endblock %}

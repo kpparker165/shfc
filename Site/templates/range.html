@@ -5,6 +5,7 @@
 
 {% block content %}
 
+{% block js %}
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -14,65 +15,162 @@ $(document).ready(function() {
         dayClick: function(date, jsEvent, view) {
             document.getElementById('rsoStartDate').value = date.format()
         },
+        // eventClick: function(calEvent, jsEvent, view) {
+
+        //     alert('Event: ' + calEvent.title);
+        //     alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+        //     alert('View: ' + view.name);
+
+        //     // change the border color just for fun
+        //     $(this).css('border-color', 'red');
+
+        // },
         events: [ 
             {% for i in rso_calendar_data %}
         {
                 start:"{{i.start_date | date:'Y-m-d'}}",
                 end:"{{i.end_date | date:'Y-m-d' }}",
-                title:"{{i.rso_title}}",
+                title:"{{i.rso_user.last_name}} {{i.start_date | date:'P'}}-{{i.end_date | date:'P'}} ",
 
         },
             {% endfor%}
-        
-        
-
-        ]
+        ],
+        editable:true,
 
     });
 
 });
 
 </script>
-{% for i in rso_calendar_data %}
-{{i.start_date}}
-{{i.end_date}}
-{{i.rso_title}}
-{% endfor%}
 
 
-
-
-
-<div class="col-12 text-center"><h2>Ranges</h2></div>
-
-<div class="row">
     
-    <div class="col-12 bg-danger text-center customDivs">
-        <b>All Firearm Ranges are open from one half hour before sunrise until 10 PM EXCEPT during normal working hours Monday through Friday* (7 AM to 4 PM) when the ranges will be closed.
-            <br>
-            <br>
-            Note, since normal working hours do not include "Off Fridays (track A)" and LMSSC designated Holidays, all ranges will be open from one half hour before sunrise until 10 PM on these days also (RSO must be active/on site - see RSO Calendar).
-            <br>
-            <br>
-            The Archery (NO FIREARMS) Range is open at all times. SHFC members who have NOT completed the MANDATORY Safety Training & Testing and received the 2017 badge will NOT be allowed access to the range As of April 1 2017. 
-            <br>
-            <br>
-            We no longer access the ranges though the Lockheed Martin gate! Skyline Hunting & Fishing is a private club - You must be an employee or retiree of Lockheed Martin Company, United Launch Alliance (ULA), or an affiliated Defense Dept contractor for eligibility for membership.
-        </b>
+  <script type="text/javascript"> 
+    function editPageContents() {
+    var content = document.getElementById("content");
+    var update_form = document.getElementById("updateForm");
+      if (content.style.display === "none") {
+        content.style.display="inline"
+        update_form.style.display = "none";
+      } else {
+        content.style.display="none"
+        update_form.style.display = "inline";
+
+      }    
+    };
+
+    function showRSOCalendar() {
+    var rsoCalendar = document.getElementById("rsoCalendar");
+    var rifleRange = document.getElementById("rifleRange");
+    var archeryRange = document.getElementById("archeryRange");
+    var showRangeImages = document.getElementById("images");
+    // var update_form = document.getElementById("updateForm");
+      if (rsoCalendar.style.display === "none") {
+        rsoCalendar.style.display="inline"
+        rifleRange.style.display = "none";
+        archeryRange.style.display = "none";
+        showRangeImages.style.display = "none";
+      }    
+    };
+
+    function showRifleRange() {
+    var rsoCalendar = document.getElementById("rsoCalendar");
+    var rifleRange = document.getElementById("rifleRange");
+    var archeryRange = document.getElementById("archeryRange");
+    var showRangeImages = document.getElementById("images");
+    // var update_form = document.getElementById("updateForm");
+      if (rifleRange.style.display === "none") {
+        rsoCalendar.style.display="none"
+        rifleRange.style.display = "inline";
+        archeryRange.style.display = "none";
+        showRangeImages.style.display = "none";
+      }    
+    };
+
+    function showArcheryRange() {
+    var rsoCalendar = document.getElementById("rsoCalendar");
+    var rifleRange = document.getElementById("rifleRange");
+    var archeryRange = document.getElementById("archeryRange");
+    var showRangeImages = document.getElementById("images");
+    // var update_form = document.getElementById("updateForm");
+      if (archeryRange.style.display === "none") {
+        rsoCalendar.style.display="none"
+        rifleRange.style.display = "none";
+        archeryRange.style.display = "inline";
+        showRangeImages.style.display = "none";
+        showRangeImages.style.display = "none";
+      }  
+    };
+
+    function showRangeImages() {
+    var rsoCalendar = document.getElementById("rsoCalendar");
+    var rifleRange = document.getElementById("rifleRange");
+    var archeryRange = document.getElementById("archeryRange");
+    var showRangeImages = document.getElementById("images");
+    // var update_form = document.getElementById("updateForm");
+      if (showRangeImages.style.display === "none") {
+        rsoCalendar.style.display="none"
+        rifleRange.style.display = "none";
+        archeryRange.style.display = "none";
+        showRangeImages.style.display = "inline";
+      }    
+    };
+  </script>
+
+{% endblock js%}
+<style>
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+}
+</style>
+
+<div class="col-12 text-center">
+    {% if user.is_authenticated and perms.home.edit_ranges_page%}
+      <button class="btn btn-warning" onclick="editPageContents()"><h3>Edit Ranges Page</h3></button>
+      <br>
+      <br>
+    {% else %}
+        <h3>Ranges</h3>
+    {% endif%}
+</div>
+
+<div id="content">
+
+<div class="row text-center">
+    <div class="col-3">
+        <button class="btn btn-info" onclick="showRSOCalendar()">RSO Calendar</button>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-info" onclick="showRifleRange()">Rifle Information </button>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-info" onclick="showArcheryRange()">Archery Information </button>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-info" onclick="showRangeImages()">Images</button>
     </div>
 </div>
 
-
 <br>
 
-<div class="row">      
+<div id="rsoCalendar">
+    <div class="col-12 bg-danger text-center customDivs">
+        {% if information.range_top_notification %}
+        <b>
+          <p>{{ information.range_top_notification | linebreaks }}</p>
+        </b>    
+        {% endif %}
+    </div>
+    
+<div class="row"> 
+     
     <div class="col-4 customDivs" >
-    {% if user.is_authenticated %}
-    <form action={% url 'shfc:updateRSOCalendar' %} method="post">
+    {% if user.is_authenticated and perms.home.edit_rso_calendar%}
+    <form action={% url 'shfc:createRSOCalendarEvent' %} method="post">
         {% csrf_token %}
         <div class="form-group">
             <label for="rsoStartDate">Date / Time</label>
-            <input name="rso_startDate" class="form-control" placeholder="yyyy-mm-dd" type="text" id="rsoStartDate" required>
+            <input name="rso_startDate" class="form-control" placeholder="yyyy-mm-dd" type="text" id="rsoStartDate" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
         </div>
         <div class="form-group">
             <label for="rsoStartDate">Start Time</label>
@@ -87,28 +185,27 @@ $(document).ready(function() {
                 <option value="10:30">10:30AM</option>
                 <option value="11:00">11:00AM</option>
                 <option value="11:30">11:30AM</option>
-                <option value="12:00">12:00AM</option>
-                <option value="12:30">12:30AM</option>
-                <option value="13:00">1:00AM</option>
-                <option value="13:30">1:30AM</option>
-                <option value="14:00">2:00AM</option>
-                <option value="14:30">2:30AM</option>
-                <option value="15:00">3:00AM</option>
-                <option value="15:30">3:30AM</option>
-                <option value="16:00">4:00AM</option>
-                <option value="16:30">4:30AM</option>
-                <option value="17:00">5:00AM</option>
-                <option value="17:30">5:30AM</option>
-                <option value="18:00">6:00AM</option>
-                <option value="18:30">6:30AM</option>
-                <option value="19:00">7:00AM</option>
-                <option value="19:30">7:30AM</option>
-                <option value="20:00">8:00AM</option>
-                <option value="20:30">8:30AM</option>
-                <option value="21:00">9:00AM</option>
-                <option value="21:30">9:30AM</option>
-                <option value="22:00">10:00AM</option>
-                <option value="22:30">10:30AM</option>
+                <option value="12:00">12:00PM</option>
+                <option value="12:30">12:30PM</option>
+                <option value="13:00">1:00PM</option>
+                <option value="13:30">1:30PM</option>
+                <option value="14:00">2:00PM</option>
+                <option value="14:30">2:30PM</option>
+                <option value="15:00">3:00PM</option>
+                <option value="15:30">3:30PM</option>
+                <option value="16:00">4:00PM</option>
+                <option value="16:30">4:30PM</option>
+                <option value="17:00">5:00PM</option>
+                <option value="17:30">5:30PM</option>
+                <option value="18:00">6:00PM</option>
+                <option value="18:30">6:30PM</option>
+                <option value="19:00">7:00PM</option>
+                <option value="19:30">7:30PM</option>
+                <option value="20:00">8:00PM</option>
+                <option value="20:30">8:30PM</option>
+                <option value="21:00">9:00PM</option>
+                <option value="21:30">9:30PM</option>
+                <option value="22:00">10:00PM</option>
             </select>
         </div>
         <div class="form-group">
@@ -124,39 +221,51 @@ $(document).ready(function() {
                 <option value="10:30">10:30AM</option>
                 <option value="11:00">11:00AM</option>
                 <option value="11:30">11:30AM</option>
-                <option value="12:00">12:00AM</option>
-                <option value="12:30">12:30AM</option>
-                <option value="13:00">1:00AM</option>
-                <option value="13:30">1:30AM</option>
-                <option value="14:00">2:00AM</option>
-                <option value="14:30">2:30AM</option>
-                <option value="15:00">3:00AM</option>
-                <option value="15:30">3:30AM</option>
-                <option value="16:00">4:00AM</option>
-                <option value="16:30">4:30AM</option>
-                <option value="17:00">5:00AM</option>
-                <option value="17:30">5:30AM</option>
-                <option value="18:00">6:00AM</option>
-                <option value="18:30">6:30AM</option>
-                <option value="19:00">7:00AM</option>
-                <option value="19:30">7:30AM</option>
-                <option value="20:00">8:00AM</option>
-                <option value="20:30">8:30AM</option>
-                <option value="21:00">9:00AM</option>
-                <option value="21:30">9:30AM</option>
-                <option value="22:00">10:00AM</option>
-                <option value="22:30">10:30AM</option>
+                <option value="12:00">12:00PM</option>
+                <option value="12:30">12:30PM</option>
+                <option value="13:00">1:00PM</option>
+                <option value="13:30">1:30PM</option>
+                <option value="14:00">2:00PM</option>
+                <option value="14:30">2:30PM</option>
+                <option value="15:00">3:00PM</option>
+                <option value="15:30">3:30PM</option>
+                <option value="16:00">4:00PM</option>
+                <option value="16:30">4:30PM</option>
+                <option value="17:00">5:00PM</option>
+                <option value="17:30">5:30PM</option>
+                <option value="18:00">6:00PM</option>
+                <option value="18:30">6:30PM</option>
+                <option value="19:00">7:00PM</option>
+                <option value="19:30">7:30PM</option>
+                <option value="20:00">8:00PM</option>
+                <option value="20:30">8:30PM</option>
+                <option value="21:00">9:00PM</option>
+                <option value="21:30">9:30PM</option>
+                <option value="22:00">10:00PM</option>
             </select>
         </div>
+        {% if perms.home.edit_rso_calendar_admin %}
+        <div class="form-group">
+            <label for="rso">User</label>
+            <select name="rso_user" class="form-control" id="rso">
+            {% for user in rso_users_list %}
+                <option value="{{user.pk}}">{{user.last_name}}, {{user.first_name}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        {% else %}
         <div class="form-group">
             <label for="rso">User</label>
             <input type="text" class="form-control" id="announcementUser"  value="{{user.username}}" readonly/>
             <input type="text" name="rso_user" class="invisible" value="{{user.pk}}" readonly/>                 
         </div>
+        {% endif %}
         <div class="form-group text-center">
             <input type="submit" value="Schedule RSO Duity" class="btn btn-success"/>
         </div>
     </form>
+    {% else %}
+    <h4>Login to schedule your RSO Days</h4>
     {% endif %}
     </div>
     <div class="col-8 text-center" id="calendar_container" >
@@ -165,102 +274,678 @@ $(document).ready(function() {
         <br>
     </div>
 </div>
+</div>
 
 <br>
 
-<div class="row">
-    <div class="col-6 customDivs">
-        <div class="col-12 text-center">
+<div id="rifleRange" style="display:none">
+    
+<div class="row" id="range_200_300_section">
+    <div class="col-7 customDivs" >
+        <div class="col-12 text-center" >
             <h3>200/300 Yard</h3>
         </div>
-        <div class="col-12">
+        {% if information.range_200_300_section %}
+        <div class="col-12" >
             <p> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            {{information.range_200_300_section}} 
             </p>
         </div>
-        <div class="col-12 text-center">
-            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
-        </div>
+        {% endif%}
     </div>
-    <div class="col-6 customDivs">
+    <div class="col-5" >
+        <img src="{% static 'images/200_300_range/200_300.JPG' %}" class="img-thumbnail">
+    </div>
+</div>
+<br>
+<div class="row" id="range_100section">
+    <div class="col-5">
+        <img src="{% static 'images/100_range/100.JPG' %}" class="img-thumbnail">
+    </div>
+    <div class="col-7 customDivs">
         <div class="col-12 text-center">
             <h3>100 Yard</h3>
         </div>
+        {% if information.range_100_section %}
         <div class="col-12">
             <p> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            {{information.range_100_section}} 
             </p>
         </div>
-        <div class="col-12 text-center">
-            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
-        </div>
+        {% endif%}
     </div>
-
 </div>
 
 <br>
 
-<div class="row">
-    <div class="col-6 customDivs">
+<div class="row" id="range_25_50_section">
+    <div class="col-7 customDivs">
         <div class="col-12 text-center">
             <h3>25/50 Yard</h3>
         </div>
+        {% if information.range_25_50_section %}
         <div class="col-12">
             <p> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            {{information.range_25_50_section}} 
             </p>
         </div>
-        <div class="col-12 text-center">
-            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
-        </div>
+        {% endif%}
     </div>
+    <div class="col-5">
+        <img src="{% static 'images/25_50_range/25_50.JPG' %}" class="img-thumbnail">
+    </div>
+</div>
 
-    <div class="col-6 customDivs">
+<br>
+
+<div class="row" id="range_trap_section">
+    <div class="col-5 text-center">
+        <img src="{% static 'images/Trap/trap.JPG' %}" class="img-thumbnail">
+    </div>
+    <div class="col-7 customDivs">
         <div class="col-12 text-center">
             <h3>Trap and Skeet</h3>
         </div>
+        {% if information.range_trap_section %}
         <div class="col-12">
             <p> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
+            {{information.range_trap_section}} 
             </p>
         </div>
-        <div class="col-12 text-center">
-            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
-        </div>
+        {% endif%}
     </div>
+</div>
+<br>
 
+<div class="row">
+    <div class="col-12 customDivs">
+        <div class="col-12 text-center">
+            <h3>Hosted Events</h3>
+        </div>
+        <div class="col-12">
+            <h4>Practical Pistol</h4>
+            <p>
+                Practical Pistol matches are held during daylight savings time. Please see the calendar or contact for start time and details.
+                <br>
+                <br>
+                Ladies Only- Monday night.  Contact Dave Norris, 303-977-8068
+                <br>
+                <br>
+                Practical Pistol Lite- Monday night.  Contact Dave Norris, 303-977-8068
+                <br>
+                <br>
+                Practical Pistol- Wednesday night.  Contact Mike Sullivan, 303-977-3478
+            </p>
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>3 Gun</h4>  
+            <p>
+                Summer 3 Gun- 1st Off-Friday morning from May through October.  Contact Walter Tang, 303-408-7860, walter_tang@msn.com
+                <br>
+                <br>
+                Winter 3 Gun- 4th Saturday morning from December through April.  Contact Walter Tang, 303-408-7860, walter_tang@msn.com
+            </p>
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Steel Challenge</h4>
+            <p>
+                Steel Challenge- 2nd Off-Friday morning from May through October.  Contact Walter Tang, 303-408-7860, walter_tang@msn.com
+            </p>
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Skeet, Sporting Clay and Trap</h4>
+            <p>
+            
+            </p>
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Muzzle Loader</h4>
+            <p>
+            
+            </p>
+        </div>
+        <br>
+    </div>
+</div>
+
+</div>
+
+<!-- #####################
+##########################
+ARCHERY 
+##########################
+###################### -->
+
+<div id="archeryRange" style="display:none">
+    
+<div class="row" id="range_archery_walking_section">
+    <div class="col-7 customDivs">
+        <div class="col-12 text-center">
+            <h3>Walking Archery</h3>
+        </div>
+        {% if information.range_archery_walking_section %}
+        <div class="col-12">
+            <p> 
+            {{information.range_archery_walking_section}} 
+            </p>
+        </div>
+        {% endif%}
+    </div>
+    <div class="col-5 text-center">
+        <img src="{% static 'images/Archery/archery_walking.JPG' %}" class="img-thumbnail">
+    </div>
+</div>
+
+<br>
+
+<div class="row" id="range_archery_standing_section">
+    <div class="col-5 text-center">
+        <img src="{% static 'images/Archery/archery_standing.JPG' %}" class="img-thumbnail">
+    </div>
+    <div class="col-7 customDivs">
+        <div class="col-12 text-center">
+            <h3>Standing Archery</h3>
+        </div>
+        {% if information.range_archery_standing_section %}
+        <div class="col-12">
+            <p> 
+            {{information.range_archery_standing_section}} 
+            </p>
+        </div>
+        {% endif%}
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-12 customDivs">
+        <div class="col-12 text-center">
+            <h3>Hunting LM Property</h3>
+        </div>
+        <div class="col-12 customDivs" >
+            <h4>Requirements</h4>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">Member of SHFC in good standing</li>
+                <li class="list-group-item list-group-item-dark">Complete 5 hours of workbond for the club.</li>
+                <li class="list-group-item list-group-item-dark">Take and pass a bowhunter education class and have the card</li>
+                <li class="list-group-item list-group-item-dark">Must attend one of the scheduled mandatory bowhunting safety briefing. (usually held weekly in July/August).</li>
+                <li class="list-group-item list-group-item-dark">A valid deer or elk license (or fall turkey license) that includes unit 461.</li>
+                <li class="list-group-item list-group-item-dark">Once all requirements are met, the applicant will interface getting a permit from LM plant protection who will verify all requirements are met and issue a hunting permission permit. This is thru the Safety briefing only</li>
+            </ul>
+            <br>
+            <h4>Noteworthy:</h4>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">You can hunt with either a rifle or archery tag using a <b>bow only</b>, however if bowhunting with a rifle tag, the 500 sq/in hunter orange requirement is still in effect (per CP&W regulations)</li>
+                <li class="list-group-item list-group-item-dark">The type of tags are:
+                    <ul>General archery deer or elk</ul>
+                    <ul>General rifle (1st-4th seasons) deer/elk</ul>
+                    <ul>PLO (private land only rifle tags) deer/elk</ul>
+                    <ul>Fall Turkey (rifle)</ul>
+                </li>
+
+                <li class="list-group-item list-group-item-dark">No muzzle loader big game tags allowed since a bow is not a legal weapon for Muzzleloader season(per CP&W regulations)</li>
+
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Bow Hunter ED</h4>
+            You will need Bow Hunter ED (not just Hunter ED). See the flyer for the bowhunter classes that will be held for Colorado. Please contact Colorado parks and wildlife to get scheduled for class (limited numbers per class). Also see the screen shot of the rules for archery hunting on LM property.
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Archery Hunting Briefing</h4>
+                Five Archery Hunting Briefing (2 hr.each) days are planned in late JUNE and JULY. Attendance in one of these briefings is required to receive special archery hunting permission permit from security for hunting on LMCO property. Please do not call security for these permits. The LM property is a draw area (461). Contact James Q Gilmore for any question.   
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Archery Hunting Rules</h4>
+            <div class="col-12 text-center">
+                <img src="{% static 'images/logos/Hunting_Rules/archery_hunt_rules.png' %}" class="img-thumbnail">
+            </div>
+        </div>
+        <br>
+    </div>
 </div>
 
 <br>
 
 <div class="row">
-    <div class="col-6 customDivs">
-        <div class="col-12 text-center">
-            <h3>Walking Archery</h3>
-        </div>
-        <div class="col-12">
-            <p> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
-            </p>
-        </div>
-        <div class="col-12 text-center">
-            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
-        </div>
+    <div class="col-12 customDivs text-center">
+        <h3>Archery Inventory</h3>
+    <div class="col-12 text-center">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <td colspan="4"><h5>Archery Equipment</h5></td>
+                </tr>
+                <tr>
+                    <td colspan="4">For use by Club Members and Hunters Education </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Tree Stand & Safety belt
+                    </td>
+                    <td>
+                        Arrows
+                    </td>
+                    <td>
+                        Finger Tabs
+                    </td>
+                    <td>
+                        Arm Guards
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">4</span>
+                        <br>
+                        Fiber glass recurve bows (2 red & 2 gold) 
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">2</span>
+                        <br>
+                        compound Bear bows (RH) (1 green & 1 white)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        compound Bear bow (RH) (kids)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Bear Minuteman recurve bow (RH)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">2</span>
+                        <br>
+                        compound Brave bows (RH)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        compound Jennings T Star (RH)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Darton compound bow (RH)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Indian Golden Comanche compound bow (RH)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        PSE USA Spirit compound bow (LH)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Wing archery recurve bow (RH)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Saunders recurve bow (LH) breakdown
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">3</span>
+                        <br>
+                        3D Standing Deer
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="col-6 customDivs">
-        <div class="col-12 text-center">
-            <h3>Standing Archery</h3>
-        </div>
-        <div class="col-12">
-            <p> 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur purus metus, malesuada non nulla nec, luctus rutrum tortor. Proin pharetra venenatis sem, nec placerat neque dignissim eu. Proin viverra in arcu vitae tempus. 
-            </p>
-        </div>
-        <div class="col-12 text-center">
-            <img src="{% static 'images/shooting_house.jpg' %}" class="img-thumbnail">
-        </div>
+    <div class="col-12 text-center">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <td colspan="4"><h5>3D Targets</h5></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">2</span>
+                        <br>
+                        Laying down deer
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">4</span>
+                        <br>
+                        Boar
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">4</span>
+                        <br>
+                        Standing deer
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">4</span>
+                        <br>
+                        Strutting turkey
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">2</span>
+                        <br>
+                        Black Bear
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">3</span>
+                        <br>
+                        Raccoon
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Ground Hog
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">3</span>
+                        <br>
+                        Wolf
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">2</span>
+                        <br>
+                        Standing Bear
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Antelope
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">3</span>
+                        <br>
+                        Javelina
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Large standing deer
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">3</span>
+                        <br>
+                        Small standing deer (small)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">3</span>
+                        <br>
+                        Coyote
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">2</span>
+                        <br>
+                        Bear on all 4s
+                    </td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Feeding deer
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="badge badge-primary badge-pill">1</span>
+                        <br>
+                        Bobcat
+                    </td>
+                    <td>
+                    
+                    </td>
+                    <td>
+                    
+                    </td>
+                    <td>
+                    
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
+    <div class="col-12 text-center">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <td colspan="4"><h5>Miscellaneous Equipment</h5></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Compound Bow Press
+                    </td>
+                    <td>
+                        Arrow straightener
+                    </td>
+                    <td>
+                        Bow Scale
+                    </td>
+                    <td>
+                        High Speed Target with stand
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Game Cart #1
+                    </td>
+                    <td>
+                        Game Cart #2
+                    </td>
+                    <td>
+                        Bander & Misc Tools
+                    </td>
+                    <td>
+                        Fletcher
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Game scale
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
 </div>
 
+
+
+
+
+
+<div id="images" style="display:none">
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>200/300 Yard Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/200_300_range/200_300.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/200_300_range/200_300_close.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/200_300_range/200_300_front.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>100 Yard Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/100_range/100_far.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/100_range/100_front.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/100_range/100.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>25/50 Yard Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/25_50_range/25_50_front.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/25_50_range/25_50_inside_out.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/25_50_range/25_50_side.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>Trap Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/trap/trap.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/trap/trap_close.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/trap/trap_side.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>Archery Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Archery/archery_standing_far.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Archery/archery_standing.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Archery/archery_walking.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- UPDATE FORM FOR THE PAGE -->
+<div class="row">
+  
+<div class="col-12 customDivs" id="updateForm" style="display:none">
+  <form action={% url 'shfc:updateRangesPage' %} method="post">
+    {% csrf_token %}
+    <!-- Important -->
+    <div class="form-group text-center">
+      <h3>Update Top Alert Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_top_notification">Description</label>
+      <textarea name="range_top_notification" class="form-control" id="range_top_notification" rows="5" required>
+          {{ information.range_top_notification}}
+      </textarea>
+    </div>
+    <!-- 200/300 -->
+    <div class="form-group text-center">
+      <h3>Update 200/300 Range Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_200_300_Description">Description</label>
+      <textarea name="range_200_300_section" class="form-control" id="range_200_300_Description" rows="5" required>
+        {{information.range_200_300_section}}
+      </textarea>
+    </div>
+    <!-- 100 -->
+    <div class="form-group text-center">
+      <h3>Update 100 Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_100_Description">Description</label>
+      <textarea name="range_100_section" class="form-control" id="range_100_Description" rows="5" required>
+        {{ information.range_100_section}}
+      </textarea>
+    </div>
+    <!-- 25/50 -->
+    <div class="form-group text-center">
+      <h3>Update 25/50 Range Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_25_50_section">Description</label>
+      <textarea name="range_25_50_section" class="form-control" id="range_25_50_section" rows="5" required>
+        {{ information.range_25_50_section}}
+      </textarea>
+    </div>
+    <!-- trap -->
+    <div class="form-group text-center">
+      <h3>Update Trap Range Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_trap_section">Description</label>
+      <textarea name="range_trap_section" class="form-control" id="range_trap_section" rows="5" required>
+        {{ information.range_trap_section}}
+      </textarea>
+    </div>
+    <!-- Archery Standing -->
+    <div class="form-group text-center">
+      <h3>Update Archery Standing Range Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_archery_standing_section">Description</label>
+      <textarea name="range_archery_standing_section" class="form-control" id="range_archery_standing_section" rows="5" required>
+        {{ information.range_archery_standing_section}}
+      </textarea>
+    </div>
+    <!-- Archery Walking -->
+    <div class="form-group text-center">
+      <h3>Update Archery Walking Range Section</h3>
+    </div>
+    <div class="form-group">
+      <label for="range_archery_walking_section">Description</label>
+      <textarea name="range_archery_walking_section" class="form-control" id="range_archery_walking_section" rows="5" required>
+        {{ information.range_archery_walking_section}}
+      </textarea>
+    </div>
+    <div class="form-group text-center">
+      <input type="submit" value="Update Ranges Page" class="btn btn-success"/>
+    </div>
+  </form>
+</div>
+</div>
 {% endblock %}

@@ -28,15 +28,14 @@
 
 {% endblock js%}
 
-
 <div class="row">
   <div class="col-12 text-center">
-    <h3>Home</h3>
-    {% if user.is_authenticated %}
-      <button class="btn btn-warning" onclick="editPageContents()">Edit Page</button>
+    {% if user.is_authenticated and perms.home.edit_home_page %}
+      <button class="btn btn-warning" onclick="editPageContents()"><h3>Edit Home Page</h3></button>
       <br>
       <br>
-
+    {% else %}
+        <h3>Home</h3>
     {% endif%}
   </div>
 </div>
