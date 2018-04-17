@@ -30,51 +30,75 @@
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
 </head>
 <body class="h-100" background="{% static 'images/bull_elk.jpg' %}">
-    <div class="containerClass h-25" style="border-bottom:solid">
+    <div class="h-25" style="background-color: rgba(0, 0, 0, 0.5);
+	color:white;">
     	<div class="col-12 text-center">
     		<a class="navbar-brand" href="{% url 'shfc:home'%}">
 	  			<img src="{% static 'images/shfclogo.png' %}">
 			</a>  
     	</div>
-		<nav class="navbar navbar-dark bg-faded ">
-		
-	  		<a class="navbar-brand" href="{% url 'shfc:home'%}">
-	    		Home
-	  		</a>
-	  		<a class="navbar-brand" href="{% url 'shfc:range' %}">
-	    		Ranges
-	  		</a>
-	  		<a class="navbar-brand" href="{% url 'shfc:marine'%}">
-	    		Marine
-	  		</a>
-	  		<a class="navbar-brand" href="{% url 'shfc:events'%}">
-	    		Events & Classes
-	  		</a>
-	  		<!-- <a class="navbar-brand" href="{% url 'shfc:about'%}">
-	    		About
-	  		</a> -->
-	  		<!-- <a class="navbar-brand" href="{% url 'shfc:membership'%}">
-	    		Membership
-	  		</a> -->
-	  		{% if user.is_authenticated %}
-	  			<a class="navbar-brand" href="{% url 'shfc:purchase'%}">
-	    			Purchasing
-	  			</a>
-	  			<a class="navbar-brand" href="{% url 'shfc:calendarManagement'%}">
-	    			Manage Calendars
-	  			</a>
-	  			<a class="navbar-brand text-warning" href="{% url 'logout' %}">
-	  				Logout
-	  			</a>
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+		  		<a class="nav-link" href="{% url 'shfc:home'%}">Home</a>
+			</li>
+	  		<li class="nav-item">
+	  			<a class="nav-link" href="{% url 'shfc:range' %}">Ranges</a>
+		  	</li>
+	  		<li class="nav-item">
+	  			<a class="nav-link" href="{% url 'shfc:marine'%}">Marine</a>
+		  	</li>
+	  		<li class="nav-item">
+	  			<a class="nav-link" href="{% url 'shfc:events'%}">Events & Classes</a>
+		  	</li>
+		  	<li class="nav-item dropdown">
+	  			<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'shfc:membership'%}" roll="button">Membership</a>
+		    	<div class="dropdown-menu">
+	  				<h6 class="dropdown-header">Information</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:membership'%}">Membership</a>
+		    		{% if user.is_authenticated %}
+	  				<div class="dropdown-divider"></div>
+	  				<h6 class="dropdown-header">Perks</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:purchase'%}">Purchasing</a>
+	  				<div class="dropdown-divider"></div>
+	  				<h6 class="dropdown-header">Work Bonds</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:workBond'%}">Work Bond</a>
+		    		{% endif %}
+		    	</div>
+		  	</li>
+		  	{% if user.is_authenticated %}
+		  	<li>
+	  			<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'shfc:membership'%}" roll="button">Site Management</a>
+		    	<div class="dropdown-menu">
+	  				<h6 class="dropdown-header">Announcement Management</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:calendarManagementANNOUNCEMENTS'%}">Announcement</a>
+	  				<div class="dropdown-divider"></div>
+		    		<h6 class="dropdown-header">Calendar Management</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:calendarManagementRSO'%}">RSO Calendar</a>
+	  				<a class="dropdown-item disabled" href="{% url 'shfc:calendarManagementEVENTS'%}">Events Calendar (not available yet)</a>
+	  				<a class="dropdown-item disabled" href="{% url 'shfc:calendarManagementMARINE'%}">Marine Calendar (not available yet)</a>
+		    	</div>
+		  	</li>
+		  	{% endif %}
+	  		<li class="nav-item">
+	  			<a class="nav-link" href="{% url 'shfc:documents'%}">All Documents</a>
+		  	</li>
+		    {% if user.is_authenticated %}
+	  		<li class="nav-item">
+		  		<a class="navbar-brand text-warning" href="{% url 'logout' %}">Logout</a>
+	  		</li>
+	  		<li class="nav-item disabled">
 	  			<h4>
 	  				{{ user.username }}
 	  			</h4>
+	  		</li>
 	  		{% else %}
+	  		<li class="nav-item">
 	  			<a  class="navbar-brand text-warning" href="{% url 'login' %}">
 	  				Login
 	  			</a>
+	  		</li>
 	  		{% endif %}
-		</nav>
+		</ul>
 	</div>
   <main class="h-75">
     <div class="col-12 h-100">
@@ -107,47 +131,13 @@
     		</div>
     		<div class="col-3 text-center containerClass h-100" style="border-left:solid">
     			<h2>Announcements</h2>
-    			{% if user.is_authenticated and perms.home.edit_announcements %}
-    			<div class="row">
-    				<div class="col-12 customDivs">
-    					<form action={% url 'shfc:newAnnouncement' %} method="post">
-    					    {% csrf_token %}
-  							<div class="form-group">
-    							<label for="announcementType">Announcement Type</label>
-    							<select name="announcement_type" class="form-control" id="announcementType">
-      								<option value="danger">Critical</option>
-      								<option value="info">Info</option>
-      								<option value="warning">Warning</option>
-    							</select>
-  							</div>
-  							<label for="announcementTitle">Title</label>
-  							<input name="announcement_title" type="text" class="form-control" id="announcementTitle" aria-describedby="Title" placeholder="Enter Title" required>
-  							<div class="form-group">
-    							<label for="announcementDescription">Description</label>
-    							<textarea name="announcement_description" class="form-control" id="announcementDescription" rows="3" required></textarea>
-  							</div>
-  							<div class="form-group">
-    							<label for="announcementUser">User</label>
-    							<input type="text" class="form-control" id="announcementUser"  value="{{user.username}}" readonly/>
-    							<input type="text" name="announcement_user" class="invisible" value="{{user.pk}}" readonly/>
-    							
-  							</div>
-    						<input type="submit" value="Create Announcement" class="btn btn-success"/>
-						</form>
-    				<br>
-    				<br>
-    				</div>
-    			</div>
-    			<br>
-    			{% endif%}
-    
     			{% for announcement in announcements %}
-    			<div class="card text-white bg-{{announcement.announcement_type}} mb-3 customDivs">
+    			<div class="card text-white bg-{{announcement.announcement_type}} mb-3 customDivs text-left">
   					<div class="card-header">
   						<h5>{{announcement.announcement_title}}</h5>
   					</div>
   					<div class="card-body">
-   						<p class="card-text">{{announcement.announcement_description}}</p>
+   						<p class="card-text">{{announcement.announcement_description | linebreaks}}</p>
    						<p class="card-text"><b>Posted By: </b> {{announcement.announcement_user.first_name}} {{announcement.announcement_user.last_name}}</p>
     					<p class="card-text">{{announcement.announcement_date}}</p>
   					</div>

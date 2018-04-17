@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .models import UpdateHomePage, NewAnnouncement, UpdateRSOCalendar, UpdateRangesPage
+from .models import NewAnnouncement, UpdateRSOCalendar
 import json
 import hashlib
 from datetime import datetime
@@ -17,16 +17,14 @@ from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
-  information =  UpdateHomePage.objects.all().first()
-  return render(request, 'home.html', {'information': information, 'announcements': announcements})
+  return render(request, 'home.html', {'announcements': announcements})
 
 def range(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   rso_calendar_data = UpdateRSOCalendar.objects.all()
-  information =  UpdateRangesPage.objects.all().first()
   rso_users_list = User.objects.filter(groups__name__in=['RSO Members']).order_by('last_name')
   return render(request, 'range.html', {'announcements': announcements, 'rso_calendar_data':rso_calendar_data,\
-    'information':information, 'rso_users_list':rso_users_list})
+    'rso_users_list':rso_users_list})
 
 def marine(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
@@ -55,6 +53,11 @@ def events(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   question = {} 
   return render(request, 'events.html', {'announcements': announcements})
+  
+def documents(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  question = {} 
+  return render(request, 'documents.html', {'announcements': announcements})
 
 @login_required
 def calendarManagement(request):
@@ -69,47 +72,30 @@ def calendarManagement(request):
     return render(request, 'calendarManagement.html', {'announcements': announcements,'personal_rso_calendar_data':personal_rso_calendar_data})
 
 @login_required
-def newAnnouncement(request):
-  if request.method == "POST":
-    if request.POST['announcement_type'] and request.POST['announcement_title'] \
-    and request.POST['announcement_description']:
-      NA = NewAnnouncement(announcement_title=request.POST['announcement_title'],\
-        announcement_type=request.POST['announcement_type'],\
-        announcement_description=request.POST['announcement_description'],\
-        announcement_user=User.objects.get(pk=request.POST['announcement_user']))
-      NA.save()
+def workBond(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  question = {} 
+  return render(request, 'workbond.html', {'announcements': announcements})
 
-      return HttpResponseRedirect('/') 
-  else:
-    print "CRAP"
 
+#################
+# RSO UPDATE PAGE
+#################
+
+# Webpage
 @login_required
-def updateHomePage(request):
-  if request.method == "POST":
-    UpdateHomePage.objects.select_for_update().filter(id=1).update(about_section=request.POST['about_description'],\
-      facilities_section=request.POST['facilities_description'], general_section=request.POST['general_description'])
-    
-    return HttpResponseRedirect('/') 
+def calendarManagementRSO(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  if request.user.has_perm('applications.admin_access'):
+    rso_users_list = User.objects.filter(groups__name__in=['RSO Members']).order_by('last_name')
+    personal_rso_calendar_data = UpdateRSOCalendar.objects.all().order_by('-start_date')
+    return render(request, 'management_rso.html', {'announcements': announcements,'personal_rso_calendar_data':personal_rso_calendar_data,
+    'rso_users_list':rso_users_list})
   else:
-    print "CRAP"
-    return HttpResponseRedirect('/')
+    personal_rso_calendar_data = UpdateRSOCalendar.objects.filter(rso_user=User.objects.get(username=request.user)).order_by('-start_date')
+    return render(request, 'management_rso.html', {'announcements': announcements,'personal_rso_calendar_data':personal_rso_calendar_data})
 
-@login_required
-def updateRangesPage(request):
-  if request.method == "POST":
-    UpdateRangesPage.objects.select_for_update().filter(id=1).update(
-      range_top_notification = request.POST['range_top_notification'],
-      range_200_300_section = request.POST['range_200_300_section'],
-      range_100_section = request.POST['range_100_section'],
-      range_25_50_section = request.POST['range_25_50_section'],
-      range_trap_section = request.POST['range_trap_section'],
-      range_archery_standing_section = request.POST['range_archery_standing_section'],
-      range_archery_walking_section = request.POST['range_archery_walking_section'])
-    return HttpResponseRedirect('/range/') 
-  else:
-    print "CRAP"
-    return HttpResponseRedirect('/') 
-
+# Save / Update / Delete
 @login_required
 def updateRSOCalendar(request):
   if request.method == "POST":
@@ -136,10 +122,46 @@ def updateRSOCalendar(request):
       URC.end_date=datetime.strptime(end_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
       URC.save()
     
-    return HttpResponseRedirect('/calendarManagement/')
+    return HttpResponseRedirect('/management/rso/')
+
+###########################
+# ANNOUNCEMENT UPDATE PAGE
+########################### 
+@login_required
+def updateAnnouncement(request):
+  if request.method == "POST":
+    if request.POST['announcement_type'] and request.POST['announcement_title'] \
+    and request.POST['announcement_description']:
+
+      if request.POST['announcement_id'] and request.POST.get('delete'):
+        NA = NewAnnouncement.objects.get(pk=request.POST['announcement_id'])
+        NA.delete()
+
+      if request.POST['announcement_id'] and request.POST.get('update'):
+        NA = NewAnnouncement.objects.get(pk=request.POST['announcement_id'])
+        NA.user = User.objects.get(pk=request.user.pk)
+        NA.announcement_type = request.POST['announcement_type']
+        NA.announcement_title = request.POST['announcement_title']
+        NA.announcement_description = request.POST['announcement_description']
+        NA.save()
+
+      if request.POST.get('create'):
+        NA = NewAnnouncement(announcement_title=request.POST['announcement_title'],\
+          announcement_type=request.POST['announcement_type'],\
+          announcement_description=request.POST['announcement_description'],\
+          announcement_user=User.objects.get(pk=request.POST['announcement_user']))
+        NA.save()
+
+      return HttpResponseRedirect('/management/announcement/')         
+  else:
+    print "Unable to process request"
+
+
+
+
 
 @login_required
-def deleteRSOCalendar(request):
+def updateEventCalendar(request):
   if request.method == "POST":
     start_date = str(request.POST['rso_startDate'])
     start_time = str(request.POST['rso_startTime'])
@@ -149,13 +171,41 @@ def deleteRSOCalendar(request):
     start_date_time = start_date + "-" + start_time
     end_date_time = start_date + "-" + end_time
 
-    URC = UpdateRSOCalendar.objects.get(pk=id)
-    URC.rso_user=User.objects.get(pk=request.POST['rso_user'])
-    URC.start_date=datetime.strptime(start_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
-    URC.end_date=datetime.strptime(end_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
-    URC.save()
+    if request.POST.get('delete') and id:
+      URC = UpdateRSOCalendar.objects.get(pk=id)
+      URC.delete()
+    elif request.POST.get('create'):
+      URC = UpdateRSOCalendar(rso_user=User.objects.get(pk=request.POST['rso_user']),\
+      start_date=datetime.strptime(start_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M"),\
+      end_date=datetime.strptime(end_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M"))
+      URC.save()
+    else:
+      URC = UpdateRSOCalendar.objects.get(pk=id)
+      URC.rso_user=User.objects.get(pk=request.POST['rso_user'])
+      URC.start_date=datetime.strptime(start_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
+      URC.end_date=datetime.strptime(end_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
+      URC.save()
     
-    return HttpResponseRedirect('/calendarManagement/')
+    return HttpResponseRedirect('/calendarManagement/rso/')
+
+# @login_required
+# def deleteRSOCalendar(request):
+#   if request.method == "POST":
+#     start_date = str(request.POST['rso_startDate'])
+#     start_time = str(request.POST['rso_startTime'])
+#     end_date = str(request.POST['rso_startDate'])
+#     end_time = str(request.POST['rso_endTime'])
+#     id = str(request.POST['reservation_id'])
+#     start_date_time = start_date + "-" + start_time
+#     end_date_time = start_date + "-" + end_time
+
+#     URC = UpdateRSOCalendar.objects.get(pk=id)
+#     URC.rso_user=User.objects.get(pk=request.POST['rso_user'])
+#     URC.start_date=datetime.strptime(start_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
+#     URC.end_date=datetime.strptime(end_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M")
+#     URC.save()
+    
+#     return HttpResponseRedirect('/calendarManagement/')
 
 @login_required
 def createRSOCalendarEvent(request):
@@ -174,22 +224,30 @@ def createRSOCalendarEvent(request):
     
     return HttpResponseRedirect('/range/')
 
-@login_required
-def updateEventCalendar(request):
-  if request.method == "POST":
-    start_date = str(request.POST['event_startDate'])
-    start_time = str(request.POST['event_startTime'])
-    end_date = str(request.POST['event_startDate'])
-    end_time = str(request.POST['event_endTime'])
-    start_date_time = start_date + "-" + start_time
-    end_date_time = start_date + "-" + end_time
 
-    # URC = UpdateRSOCalendar(rso_user=User.objects.get(pk=request.POST['rso_user']),\
-    #   start_date=datetime.strptime(start_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M"),\
-    #   end_date=datetime.strptime(end_date_time, '%Y-%m-%d-%H:%M').strftime("%Y-%m-%d %H:%M"))
-    # URC.save()
-    
-    return HttpResponseRedirect('/range/') 
+
+
+
+
+
+
+
+
+@login_required
+def calendarManagementEVENTS(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  return render(request, 'management_events.html', {'announcements': announcements})
+
+@login_required
+def calendarManagementMARINE(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  return render(request, 'management_marine.html', {'announcements': announcements})
+
+@login_required
+def calendarManagementANNOUNCEMENTS(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  return render(request, 'management_announcement.html', {'announcements': announcements})
+
    
     
 @csrf_exempt
@@ -235,6 +293,22 @@ def save(request):
   else:
     return HttpResponse("DID NOT USE A POST COMMAND")
 
+
+@login_required
+def updateRangesPage(request):
+  if request.method == "POST":
+    UpdateRangesPage.objects.select_for_update().filter(id=1).update(
+      range_top_notification = request.POST['range_top_notification'],
+      range_200_300_section = request.POST['range_200_300_section'],
+      range_100_section = request.POST['range_100_section'],
+      range_25_50_section = request.POST['range_25_50_section'],
+      range_trap_section = request.POST['range_trap_section'],
+      range_archery_standing_section = request.POST['range_archery_standing_section'],
+      range_archery_walking_section = request.POST['range_archery_walking_section'])
+    return HttpResponseRedirect('/range/') 
+  else:
+    print "CRAP"
+    return HttpResponseRedirect('/') 
 ## FOR TESTING URLS
 # def tetingSend():
 # import requests  

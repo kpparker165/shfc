@@ -2,120 +2,40 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-{% block js %}
-
-    
-  <script type="text/javascript"> 
-    function editPageContents() {
-    var about = document.getElementById("about");
-    var facilities = document.getElementById("facilities");
-    var general = document.getElementById("general");
-    var update_form = document.getElementById("updateForm");
-      if (about.style.display === "none") {
-        about.style.display = "inline";
-        facilities.style.display = "inline";
-        general.style.display = "inline";
-        update_form.style.display = "none";
-      } else {
-        about.style.display = "none";
-        facilities.style.display = "none";
-        general.style.display = "none";
-        update_form.style.display = "inline";
-
-      }    
-    };
-  </script>
-
-{% endblock js%}
 
 <div class="row">
   <div class="col-12 text-center">
-    {% if user.is_authenticated and perms.home.edit_home_page %}
-      <button class="btn btn-warning" onclick="editPageContents()"><h3>Edit Home Page</h3></button>
-      <br>
-      <br>
-    {% else %}
-        <h3>Home</h3>
-    {% endif%}
+      <h3>Home</h3>
   </div>
 </div>
 <div class="row" >
 	<div class="col-12 customDivs" id="about">
     <h3>About</h3>
-      {% if information.about_section %}
-        <p>
-          {{ information.about_section |linebreaks }}
-        </p>
-      {% else %}
-        <p> </p>
-      {% endif %}
+      <p>
+        With the ever increasing strains and pressures of modern day life, it is not only desirable but necessary to put them aside occasionally and live for awhile under the more primitive conditions which enabled them to build this great nation. From this, the Skyline Hunting and Fishing Club encourages, to the highest degree, sportsmanship not only among its members, but all persons engaged in a competitive or noncompetitive sporting events. including hunting and fishing. It is a growing club constantly adding new facilities and activities which call for new members. Whether you are interested in upland game, waterfowl, big game, fishing, conservation, shooting, archery, hunter and bow hunter education or social events, the Skyline Hunting and Fishing Club wants to be a part of your recreation.
+      </p>
+      <p>
+        The Skyline Hunting and Fishing Club, Inc. is a very active organization of approximately 800 sportsmen. The club oversees many activities such as fishing, hunting, hunter and bowhunter education classes, firearms safety classes, organized as well as general recreational shooting.</p>
   </div>
 </div>
 <br>
 <div class="row">
     <div class="col-5 customDivs" id="facilities">
       <h3>Facilities</h3>
-        {% if information.facilities_section %}
-          <p>
-            {{ information.facilities_section |linebreaks }}
-          </p>
-        {% else %}
-          <p> </p>
-        {% endif %}
+        <p>
+          The shooting and archery facilities, which are located at the Lockheed Martin Astronautics Waterton Plant, consists of a trap and skeet range, an enclosed 25 and 50 yard Multi Function Facility range, a 100 and 200/300 yard rifle range with concrete shooting benches under a covered area. The archery range consists of a 28 target field course as well as practice targets. The range is open for use to club members, immediate family and guests almost every day of the year with a few exceptions such as the LMA open house
+        </p>
     </div>
     <div class="col-2"></div>
     <div class="col-5 customDivs" id="general">
       <h3>General</h3>
-        {% if information.general_section %}
-          <p>
-            {{ information.general_section |linebreaks }}
-          </p>
-        {% else %}
-          <p> </p>
-        {% endif %}
+        <p>
+          Board meetings are held at 5:15 p.m. the 1st Monday of every month at the club house building (M41) up the road from the ball fields in the recreation area. Member meetings are quarterly in February, May, August and December. Member Meetings at the clubhouse are on the 2nd Monday of the month, starts at 5 pm and consist of a short club business meeting, hunting or fishing videos, live demonstrations, seminars by invited guests or speakers and a delicious supper complete with beverages. A good time is always enjoyed by the members and families.
+        </p>
+        <p>
+          The club sponsors an annual BBQ called the Bull Roast and Shooting Arcade (August) which is great fun for the entire family. In February, the annual awards banquet is held, complete a with catered dinner. At this function, the new club officers are installed and all of the fishing, hunting, archery and shooting awards are presented.
+        </p>
     </div>
-</div>
-
-<div class="row">
-  
-<div class="col-12 customDivs" id="updateForm" style="display:none">
-  <form action={% url 'shfc:updateHomePage' %} method="post">
-    {% csrf_token %}
-    <!-- About -->
-    <div class="form-group text-center">
-      <h3>Update About Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="aboutDescription">Description</label>
-      <textarea name="about_description" class="form-control" id="aboutDescription" rows="15" required>
-          {{ information.about_section}}
-      </textarea>
-    </div>
-    <!-- Facilities -->
-    <div class="form-group text-center">
-      <h3>Update Facilities Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="facilitiesDescription">Description</label>
-      <textarea name="facilities_description" class="form-control" id="facilitiesDescription" rows="15" required>
-        {{ information.facilities_section}}
-      </textarea>
-    </div>
-    <!-- General -->
-    <div class="form-group text-center">
-      <h3>Update General Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="generalDescription">Description</label>
-      <textarea name="general_description" class="form-control" id="generalDescription" rows="15" required>
-        {{ information.general_section}}
-      </textarea>
-    </div>
-    <div class="form-group text-center">
-      <input type="submit" value="Update Home Page" class="btn btn-success"/>
-    </div>
-  </form>
-</div>
 </div>
  
 {% endblock %}

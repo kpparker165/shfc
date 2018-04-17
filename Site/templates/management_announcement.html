@@ -1,0 +1,117 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Range{% endblock %}
+
+{% block content %}
+
+<style>
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+}
+</style>
+<script type="text/javascript"> 
+
+function updateRSOCalendar(pk_value, type, title, description, user_pk){
+  var pk = document.getElementById("pk");
+  var announcement_type = document.getElementById("announcementType");
+  var announcement_title = document.getElementById("announcementTitle");
+  var announcement_description = document.getElementById("announcementDescription");
+  var user_pk = document.getElementById("announcementUser");
+  announcement_type.value= type;
+  announcement_title.value= title;
+  announcement_description.value= description;
+  pk.value=pk_value;
+  rso_user.value=user_pk;
+  
+};
+
+</script>
+<div class="row customDivs">
+
+    <div class="col-12 text-center">
+        <h2>Management - Announcements</h2>
+    </div>
+    <br>
+    {% if user.is_authenticated and perms.home.edit_announcements %}
+    <div class="col-6" style="height:300px; overflow-y: scroll;">
+    {% if  announcements %}
+
+    {% for announcement in announcements %}
+
+      <div class="list-group">
+        <button type="button" onclick="updateRSOCalendar({{announcement.pk}}, '{{announcement.announcement_type}}', '{{announcement.announcement_title}}','{{announcement.announcement_description | linebreaksbr}}')" class="list-group-item list-group-item-action">
+          Title:<br> 
+          {{announcement.announcement_title}}<br>
+          <hr>
+          Description:<br>
+          {{announcement.announcement_description | linebreaks}}<br>
+          <hr>
+          Posted Date:<br>
+          {{announcement.announcement_date}}<br>
+          <hr>
+          Post ID: {{announcement.pk}}<br>
+           
+        </button>
+      </div>
+      <br>
+    {% endfor %}
+    {% else %}
+      <h3>There are no announcements yet.</h3>
+    {% endif %}  
+    </div>      
+    <div class="col-6" >
+    <div class="row">
+        <div class="col-12 ">
+            <form action={% url 'shfc:updateAnnouncement' %} method="post">
+                {% csrf_token %}
+                <div class="form-group" style="display:none">
+                    <label for="pk">Id</label>
+                    <input name="announcement_id" class="form-control" type="number" id="pk">
+                </div>
+                <div class="form-group">
+                    <label for="announcementType">Announcement Importance</label>
+                    <select name="announcement_type" class="form-control" id="announcementType">
+                        <option value="danger">High</option>
+                        <option value="warning">Medium</option>
+                        <option value="info">Low</option>
+                    </select>
+                </div>
+                <label for="announcementTitle">Title</label>
+                <input name="announcement_title" type="text" class="form-control" id="announcementTitle" aria-describedby="Title" value="" placeholder="Enter Title" required>
+                <div class="form-group">
+                    <label for="announcementDescription">Description</label>
+                    <textarea name="announcement_description" class="form-control" id="announcementDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="announcementUser">User</label>
+                    <input type="text" class="form-control" id="announcementUser"  value="{{user.username}}" readonly/>
+                    <input type="text" name="announcement_user" class="invisible" value="{{user.pk}}" readonly/>
+                    
+                </div>
+                <div class="form-row text-center">
+                    <div class="col-6">
+                        <input type="submit" name="create" value="Create" class="btn btn-success"/>
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" name="update" value="Update" class="btn btn-warning"/>
+                    </div>
+                    <div class="col-12">
+                        <input type="submit" name="delete" value="Delete" class="btn btn-danger"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    </div>
+    {% else %}
+    <br>
+    <div class="col-12 text-center">
+      <br>
+      <h5>You do not have permissions to manage announcements</h5>
+      <br>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

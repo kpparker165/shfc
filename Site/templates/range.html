@@ -30,7 +30,7 @@ $(document).ready(function() {
         {
                 start:"{{i.start_date | date:'Y-m-d'}}",
                 end:"{{i.end_date | date:'Y-m-d' }}",
-                title:"{{i.rso_user.last_name}} {{i.start_date | date:'P'}}-{{i.end_date | date:'P'}} ",
+                title:"{{i.rso_user.last_name}} {{i.start_date | date:'P'}} - {{i.end_date | date:'P'}} ",
 
         },
             {% endfor%}
@@ -125,29 +125,23 @@ $(document).ready(function() {
 </style>
 
 <div class="col-12 text-center">
-    {% if user.is_authenticated and perms.home.edit_ranges_page%}
-      <button class="btn btn-warning" onclick="editPageContents()"><h3>Edit Ranges Page</h3></button>
-      <br>
-      <br>
-    {% else %}
-        <h3>Ranges</h3>
-    {% endif%}
+    <h3>Ranges</h3>
 </div>
 
 <div id="content">
 
 <div class="row text-center">
     <div class="col-3">
-        <button class="btn btn-info" onclick="showRSOCalendar()">RSO Calendar</button>
+        <button class="btn btn-info " onclick="showRSOCalendar()">RSO Calendar</button>
     </div>
     <div class="col-3">
-        <button class="btn btn-info" onclick="showRifleRange()">Rifle Information </button>
+        <button class="btn btn-info" onclick="showRifleRange()">Shooting Range </button>
     </div>
     <div class="col-3">
-        <button class="btn btn-info" onclick="showArcheryRange()">Archery Information </button>
+        <button class="btn btn-info" onclick="showArcheryRange()">Archery Range </button>
     </div>
     <div class="col-3">
-        <button class="btn btn-info" onclick="showRangeImages()">Images</button>
+        <button class="btn btn-info" onclick="showRangeImages()">Range Images</button>
     </div>
 </div>
 
@@ -155,120 +149,15 @@ $(document).ready(function() {
 
 <div id="rsoCalendar">
     <div class="col-12 bg-danger text-center customDivs">
-        {% if information.range_top_notification %}
         <b>
-          <p>{{ information.range_top_notification | linebreaks }}</p>
+            <p>
+                All Firearm Ranges are open from one half hour before sunrise until 10 PM EXCEPT during normal working hours Monday through Friday* (7 AM to 4 PM) when the ranges will be closed. *Note, since normal working hours do not include " Off Fridays (track A)" and LMSSC designated Holidays, all ranges will be open from one half hour before sunrise until 10 PM on these days also (RSO must be active/on site - see RSO Calendar). The Archery (NO FIREARMS) Range is open at all times. SHFC members who have NOT completed the MANDATORY Safety Training & Testing and received the 2017 badge will NOT be allowed access to the range As of April 1 2017. We no longer access the ranges though the Lockheed Martin gate! Skyline Hunting & Fishing is a private club - You must be an employee or retiree of Lockheed Martin Company, United Launch Alliance (ULA), or an affiliated Defense Dept contractor for eligibility for membership.
+            </p>
         </b>    
-        {% endif %}
     </div>
     
 <div class="row"> 
-     
-    <div class="col-4 customDivs" >
-    {% if user.is_authenticated and perms.home.edit_rso_calendar%}
-    <form action={% url 'shfc:createRSOCalendarEvent' %} method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="rsoStartDate">Date / Time</label>
-            <input name="rso_startDate" class="form-control" placeholder="yyyy-mm-dd" type="text" id="rsoStartDate" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-        </div>
-        <div class="form-group">
-            <label for="rsoStartDate">Start Time</label>
-            <select name="rso_startTime" class="form-control" id="rsoStartDate">
-                <option value="07:00">7:00AM</option>
-                <option value="07:30">7:30AM</option>
-                <option value="08:00">8:00AM</option>
-                <option value="08:30">8:30AM</option>
-                <option value="09:00">9:00AM</option>
-                <option value="09:30">9:30AM</option>
-                <option value="10:00">10:00AM</option>
-                <option value="10:30">10:30AM</option>
-                <option value="11:00">11:00AM</option>
-                <option value="11:30">11:30AM</option>
-                <option value="12:00">12:00PM</option>
-                <option value="12:30">12:30PM</option>
-                <option value="13:00">1:00PM</option>
-                <option value="13:30">1:30PM</option>
-                <option value="14:00">2:00PM</option>
-                <option value="14:30">2:30PM</option>
-                <option value="15:00">3:00PM</option>
-                <option value="15:30">3:30PM</option>
-                <option value="16:00">4:00PM</option>
-                <option value="16:30">4:30PM</option>
-                <option value="17:00">5:00PM</option>
-                <option value="17:30">5:30PM</option>
-                <option value="18:00">6:00PM</option>
-                <option value="18:30">6:30PM</option>
-                <option value="19:00">7:00PM</option>
-                <option value="19:30">7:30PM</option>
-                <option value="20:00">8:00PM</option>
-                <option value="20:30">8:30PM</option>
-                <option value="21:00">9:00PM</option>
-                <option value="21:30">9:30PM</option>
-                <option value="22:00">10:00PM</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="rsoEndTime">End Time</label>
-            <select name="rso_endTime" class="form-control" id="rsoEndTime">
-                <option value="07:00">7:00AM</option>
-                <option value="07:30">7:30AM</option>
-                <option value="08:00">8:00AM</option>
-                <option value="08:30">8:30AM</option>
-                <option value="09:00">9:00AM</option>
-                <option value="09:30">9:30AM</option>
-                <option value="10:00">10:00AM</option>
-                <option value="10:30">10:30AM</option>
-                <option value="11:00">11:00AM</option>
-                <option value="11:30">11:30AM</option>
-                <option value="12:00">12:00PM</option>
-                <option value="12:30">12:30PM</option>
-                <option value="13:00">1:00PM</option>
-                <option value="13:30">1:30PM</option>
-                <option value="14:00">2:00PM</option>
-                <option value="14:30">2:30PM</option>
-                <option value="15:00">3:00PM</option>
-                <option value="15:30">3:30PM</option>
-                <option value="16:00">4:00PM</option>
-                <option value="16:30">4:30PM</option>
-                <option value="17:00">5:00PM</option>
-                <option value="17:30">5:30PM</option>
-                <option value="18:00">6:00PM</option>
-                <option value="18:30">6:30PM</option>
-                <option value="19:00">7:00PM</option>
-                <option value="19:30">7:30PM</option>
-                <option value="20:00">8:00PM</option>
-                <option value="20:30">8:30PM</option>
-                <option value="21:00">9:00PM</option>
-                <option value="21:30">9:30PM</option>
-                <option value="22:00">10:00PM</option>
-            </select>
-        </div>
-        {% if perms.home.edit_rso_calendar_admin %}
-        <div class="form-group">
-            <label for="rso">User</label>
-            <select name="rso_user" class="form-control" id="rso">
-            {% for user in rso_users_list %}
-                <option value="{{user.pk}}">{{user.last_name}}, {{user.first_name}}</option>
-            {% endfor %}
-            </select>
-        </div>
-        {% else %}
-        <div class="form-group">
-            <label for="rso">User</label>
-            <input type="text" class="form-control" id="announcementUser"  value="{{user.username}}" readonly/>
-            <input type="text" name="rso_user" class="invisible" value="{{user.pk}}" readonly/>                 
-        </div>
-        {% endif %}
-        <div class="form-group text-center">
-            <input type="submit" value="Schedule RSO Duity" class="btn btn-success"/>
-        </div>
-    </form>
-    {% else %}
-    <h4>Login to schedule your RSO Days</h4>
-    {% endif %}
-    </div>
-    <div class="col-8 text-center" id="calendar_container" >
+    <div class="col-12 text-center" id="calendar_container" >
         <h3>RSO Calendar</h3>
         <div id='RSOcalendar'></div>
         <br>
@@ -285,13 +174,10 @@ $(document).ready(function() {
         <div class="col-12 text-center" >
             <h3>200/300 Yard</h3>
         </div>
-        {% if information.range_200_300_section %}
         <div class="col-12" >
             <p> 
-            {{information.range_200_300_section}} 
             </p>
         </div>
-        {% endif%}
     </div>
     <div class="col-5" >
         <img src="{% static 'images/200_300_range/200_300.JPG' %}" class="img-thumbnail">
@@ -306,13 +192,10 @@ $(document).ready(function() {
         <div class="col-12 text-center">
             <h3>100 Yard</h3>
         </div>
-        {% if information.range_100_section %}
         <div class="col-12">
             <p> 
-            {{information.range_100_section}} 
             </p>
         </div>
-        {% endif%}
     </div>
 </div>
 
@@ -323,13 +206,10 @@ $(document).ready(function() {
         <div class="col-12 text-center">
             <h3>25/50 Yard</h3>
         </div>
-        {% if information.range_25_50_section %}
         <div class="col-12">
             <p> 
-            {{information.range_25_50_section}} 
             </p>
         </div>
-        {% endif%}
     </div>
     <div class="col-5">
         <img src="{% static 'images/25_50_range/25_50.JPG' %}" class="img-thumbnail">
@@ -346,13 +226,10 @@ $(document).ready(function() {
         <div class="col-12 text-center">
             <h3>Trap and Skeet</h3>
         </div>
-        {% if information.range_trap_section %}
         <div class="col-12">
             <p> 
-            {{information.range_trap_section}} 
             </p>
         </div>
-        {% endif%}
     </div>
 </div>
 <br>
@@ -427,13 +304,10 @@ ARCHERY
         <div class="col-12 text-center">
             <h3>Walking Archery</h3>
         </div>
-        {% if information.range_archery_walking_section %}
         <div class="col-12">
             <p> 
-            {{information.range_archery_walking_section}} 
             </p>
         </div>
-        {% endif%}
     </div>
     <div class="col-5 text-center">
         <img src="{% static 'images/Archery/archery_walking.JPG' %}" class="img-thumbnail">
@@ -450,13 +324,10 @@ ARCHERY
         <div class="col-12 text-center">
             <h3>Standing Archery</h3>
         </div>
-        {% if information.range_archery_standing_section %}
         <div class="col-12">
             <p> 
-            {{information.range_archery_standing_section}} 
             </p>
         </div>
-        {% endif%}
     </div>
 </div>
 <br>
@@ -861,91 +732,6 @@ ARCHERY
             <img src="{% static 'images/Archery/archery_walking.JPG' %}" class="img-thumbnail">
         </div>
     </div>
-</div>
-</div>
-
-
-
-<!-- UPDATE FORM FOR THE PAGE -->
-<div class="row">
-  
-<div class="col-12 customDivs" id="updateForm" style="display:none">
-  <form action={% url 'shfc:updateRangesPage' %} method="post">
-    {% csrf_token %}
-    <!-- Important -->
-    <div class="form-group text-center">
-      <h3>Update Top Alert Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_top_notification">Description</label>
-      <textarea name="range_top_notification" class="form-control" id="range_top_notification" rows="5" required>
-          {{ information.range_top_notification}}
-      </textarea>
-    </div>
-    <!-- 200/300 -->
-    <div class="form-group text-center">
-      <h3>Update 200/300 Range Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_200_300_Description">Description</label>
-      <textarea name="range_200_300_section" class="form-control" id="range_200_300_Description" rows="5" required>
-        {{information.range_200_300_section}}
-      </textarea>
-    </div>
-    <!-- 100 -->
-    <div class="form-group text-center">
-      <h3>Update 100 Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_100_Description">Description</label>
-      <textarea name="range_100_section" class="form-control" id="range_100_Description" rows="5" required>
-        {{ information.range_100_section}}
-      </textarea>
-    </div>
-    <!-- 25/50 -->
-    <div class="form-group text-center">
-      <h3>Update 25/50 Range Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_25_50_section">Description</label>
-      <textarea name="range_25_50_section" class="form-control" id="range_25_50_section" rows="5" required>
-        {{ information.range_25_50_section}}
-      </textarea>
-    </div>
-    <!-- trap -->
-    <div class="form-group text-center">
-      <h3>Update Trap Range Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_trap_section">Description</label>
-      <textarea name="range_trap_section" class="form-control" id="range_trap_section" rows="5" required>
-        {{ information.range_trap_section}}
-      </textarea>
-    </div>
-    <!-- Archery Standing -->
-    <div class="form-group text-center">
-      <h3>Update Archery Standing Range Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_archery_standing_section">Description</label>
-      <textarea name="range_archery_standing_section" class="form-control" id="range_archery_standing_section" rows="5" required>
-        {{ information.range_archery_standing_section}}
-      </textarea>
-    </div>
-    <!-- Archery Walking -->
-    <div class="form-group text-center">
-      <h3>Update Archery Walking Range Section</h3>
-    </div>
-    <div class="form-group">
-      <label for="range_archery_walking_section">Description</label>
-      <textarea name="range_archery_walking_section" class="form-control" id="range_archery_walking_section" rows="5" required>
-        {{ information.range_archery_walking_section}}
-      </textarea>
-    </div>
-    <div class="form-group text-center">
-      <input type="submit" value="Update Ranges Page" class="btn btn-success"/>
-    </div>
-  </form>
 </div>
 </div>
 {% endblock %}

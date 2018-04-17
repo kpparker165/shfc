@@ -70,21 +70,15 @@ $(document).ready(function() {
 </style>
 
 <div class="col-12 text-center">
-    {% if user.is_authenticated and perms.home.edit_ranges_page%}
-      <button class="btn btn-warning" onclick="editPageContents()"><h3>Edit Events Page</h3></button>
-      <br>
-      <br>
-    {% else %}
-        <h3>Events</h3>
-    {% endif%}
+    <h3>Events</h3>
 </div>
 
 
-<div class="row" id="content">
-	<div class="col-3">
+<div class="row text-center" id="content">
+	<div class="col-6">
 		<button class="btn btn-info" onclick="showEventsCalendar()">Events Calendar</button>
 	</div>
-	<div class="col-3">
+	<div class="col-6">
 		<button class="btn btn-info" onclick="showEducationalClasses()">Classes</button>
 	</div>
 </div>
@@ -234,15 +228,7 @@ $(document).ready(function() {
 <div id="eventsCalendar">
 	
 <div class="row" >
-	<div class="col-4 text-center">
-		<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#test" aria-expanded="false" aria-controls="test">
-    		New Event
-  		</button>
-  		<div class="collapse " id="test">
-  				
-		</div>
-	</div>
-	<div class="col-8 text-center" id="calendar_container" >
+	<div class="col-12 text-center" id="calendar_container" >
         <h3>Events Calendar</h3>
         <div id='EVENTScalendar'></div>
         <br>

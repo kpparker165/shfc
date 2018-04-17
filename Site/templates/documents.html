@@ -1,0 +1,123 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Documents{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center">
+        <h1> All Documents</h1>
+    </div>
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h4>Membership</h4>
+        </div>
+        <div class="col-12">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/2018 Application for Membership.pdf' %}" download>
+                        2018 Application for Membership
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/2016 Range Rules (03-22-16).pdf' %}" download>
+                        2016 Range Rules (03-22-16).pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/' 2018 Cease Fire Rules Chart.pdf%}" download>
+                        2018 Cease Fire Rules Chart.pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/2018 Liability-Waiver Form (Member) Addtional Statements.pdf' %}" download>
+                        2018 Liability-Waiver Form (Member) Addtional Statements.pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/2018 Liability-Waiver Form (Member).pdf' %}" download>
+                        2018 Liability-Waiver Form (Member).pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/2018 Range Orientation Walk Down Checklist.pdf' %}" download>
+                        2018 Range Orientation Walk Down Checklist.pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/2018 Range Safety Access Test.pdf' %}" download>
+                        2018 Range Safety Access Test.pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/SHFC By Laws 2016.pdf' %}" download>
+                        SHFC By Laws.pdf
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/membership/SHFC MOA 2016.pdf' %}" download>
+                        SHFC MOA.pdf
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <br>
+    </div>
+    <div class="col-6 customDivs">
+        <div class="col-12 text-center">
+            <h4>Marine</h4>
+        </div>
+        <div class="col-12">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/marine/Facilities - Skyline Hunting and Fishing Club - 2018 Liability-Waiver Form --  boat usage  (MEMBER).pdf' %}" download>
+                        2018 Liability-Waiver Form --  boat usage  (MEMBER)
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/marine/Facilities - Skyline Hunting and Fishing Club - 2018 Liability-Waiver Form --  boat usage (GUEST).pdf' %}" download>
+                        2018 Liability-Waiver Form --  boat usage (GUEST)
+                    </a>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/marine/2018 Crestliner Checkout form_R0.pdf' %}" download>
+                        Crestliner Checkout Form
+                    </a>
+                    <br>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/marine/SHFC Crestliner checklist.pdf' %}" download>
+                        Crestliner Checklist
+                    </a> 
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/marine/SHFC Lund,Mirrocraft checklist.pdf' %}" download>
+                        Lund, Mirrocraft Checklist
+                    </a>
+                    <br>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/marine/2018 Lund, Mirrocraft Checkout form.pdf' %}" download>
+                        Lund, Mirrocraft Checkout Form
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="col-12 text-center">
+            <h4>Purchasing</h4>
+        </div>
+        <div class="col-12">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-dark">
+                    <a href="{% static 'documents/purchasing/01-12-16 (SHFC Purchasing Guidlines).docx' %}" download>
+                        SHFC Purchasing Guidlines
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
