@@ -6,7 +6,13 @@ app_name = 'shfc'
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^about/$', views.about, name='about'),
+
+    # Range
+
     url(r'^range/$', views.range, name='range'),
+    url(r'^range/shooting/$', views.rangeShooting, name='rangeShooting'),
+    url(r'^range/archery/$', views.rangeArchery, name='rangeArchery'),
+    url(r'^range/images/$', views.rangeImages, name='rangeImages'),
 
     url(r'^marine/$', views.marine, name='marine'),
     url(r'^marine/boats_rentals_information/$', views.marineBoatInformation, name='marineBoatInformation'),

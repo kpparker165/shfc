@@ -1,0 +1,80 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Range{% endblock %}
+
+{% block content %}
+
+{% block js %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    
+    $('#RSOcalendar').fullCalendar({
+        dayClick: function(date, jsEvent, view) {
+            document.getElementById('rsoStartDate').value = date.format()
+        },
+        // eventClick: function(calEvent, jsEvent, view) {
+
+        //     alert('Event: ' + calEvent.title);
+        //     alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+        //     alert('View: ' + view.name);
+
+        //     // change the border color just for fun
+        //     $(this).css('border-color', 'red');
+
+        // },
+        events: [ 
+            {% for i in rso_calendar_data %}
+        {
+                start:"{{i.start_date | date:'Y-m-d'}}",
+                end:"{{i.end_date | date:'Y-m-d' }}",
+                title:"{{i.rso_user.last_name}} {{i.start_date | date:'P'}} - {{i.end_date | date:'P'}} ",
+
+        },
+            {% endfor%}
+        ],
+        editable:true,
+
+    });
+
+});
+
+</script>
+
+{% endblock js%}
+<style>
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+}
+</style>
+
+<div class="row">
+    <div class="col-12 customDivs">
+        <div class="col-12 text-center">
+            <h1>Ranges </h1>
+            <h2>RSO Calendar</h2>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-12 bg-danger text-center customDivs">
+        <b>
+            <p>
+                All Firearm Ranges are open from one half hour before sunrise until 10 PM EXCEPT during normal working hours Monday through Friday* (7 AM to 4 PM) when the ranges will be closed. *Note, since normal working hours do not include " Off Fridays (track A)" and LMSSC designated Holidays, all ranges will be open from one half hour before sunrise until 10 PM on these days also (RSO must be active/on site - see RSO Calendar). The Archery (NO FIREARMS) Range is open at all times. SHFC members who have NOT completed the MANDATORY Safety Training & Testing and received the 2017 badge will NOT be allowed access to the range As of April 1 2017. We no longer access the ranges though the Lockheed Martin gate! Skyline Hunting & Fishing is a private club - You must be an employee or retiree of Lockheed Martin Company, United Launch Alliance (ULA), or an affiliated Defense Dept contractor for eligibility for membership.
+            </p>
+        </b>    
+    </div>
+</div>
+<br>
+<div class="row"> 
+    <div class="col-12 text-center" id="calendar_container" >
+        <h3>RSO Calendar</h3>
+        <div id='RSOcalendar'></div>
+        <br>
+    </div>
+</div>
+{% endblock %}

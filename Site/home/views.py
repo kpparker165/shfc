@@ -23,8 +23,20 @@ def range(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   rso_calendar_data = UpdateRSOCalendar.objects.all()
   rso_users_list = User.objects.filter(groups__name__in=['RSO Members']).order_by('last_name')
-  return render(request, 'range.html', {'announcements': announcements, 'rso_calendar_data':rso_calendar_data,\
+  return render(request, 'range/range.html', {'announcements': announcements, 'rso_calendar_data':rso_calendar_data,\
     'rso_users_list':rso_users_list})
+
+def rangeShooting(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  return render(request, 'range/range_shooting.html', {'announcements': announcements})
+
+def rangeArchery(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  return render(request, 'range/range_archery.html', {'announcements': announcements,})
+
+def rangeImages(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  return render(request, 'range/range_images.html', {'announcements': announcements,})
 
 
 ##############
@@ -53,17 +65,11 @@ def marineBoatTrips(request):
 # MEMBERSHIP 
 #############
 #############
+
 def membership(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   data = {}#SensorData.objects.all() 
   return render(request, 'membership.html', {'announcements': announcements})
-
-    # return HttpResponse("Hello, world. You're at the Water index.")
-
-def about(request):
-  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
-  question = {}
-  return render(request, 'about.html', {'announcements': announcements})
 
 @login_required
 def purchase(request):
@@ -71,15 +77,17 @@ def purchase(request):
   question = {} 
   return render(request, 'purchase.html', {'announcements': announcements})
 
-def events(request):
+@login_required
+def workBond(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   question = {} 
-  return render(request, 'events.html', {'announcements': announcements})
-  
-def documents(request):
-  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
-  question = {} 
-  return render(request, 'documents.html', {'announcements': announcements})
+  return render(request, 'workbond.html', {'announcements': announcements})
+
+#################
+#################
+# SITE MANAGEMENT
+#################
+#################
 
 @login_required
 def calendarManagement(request):
@@ -92,12 +100,24 @@ def calendarManagement(request):
   else:
     personal_rso_calendar_data = UpdateRSOCalendar.objects.filter(rso_user=User.objects.get(username=request.user)).order_by('-start_date')
     return render(request, 'calendarManagement.html', {'announcements': announcements,'personal_rso_calendar_data':personal_rso_calendar_data})
+  
+def about(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  question = {}
+  return render(request, 'about.html', {'announcements': announcements})
 
-@login_required
-def workBond(request):
+
+def events(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   question = {} 
-  return render(request, 'workbond.html', {'announcements': announcements})
+  return render(request, 'events.html', {'announcements': announcements})
+  
+def documents(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  question = {} 
+  return render(request, 'documents.html', {'announcements': announcements})
+
+
 
 
 #################

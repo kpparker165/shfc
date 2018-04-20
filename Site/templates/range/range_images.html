@@ -1,0 +1,95 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Range{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12 customDivs">
+        <div class="col-12 text-center">
+            <h1>Ranges </h1>
+            <h2>Image Gallery</h2>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row customDivs">
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>200/300 Yard Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/200_300_range/200_300.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/200_300_range/200_300_close.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/200_300_range/200_300_front.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>100 Yard Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/100_range/100_far.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/100_range/100_front.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/100_range/100.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>25/50 Yard Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/25_50_range/25_50_front.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/25_50_range/25_50_inside_out.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/25_50_range/25_50_side.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>Trap Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Trap/trap.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Trap/trap_close.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Trap/trap_side.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-12">
+            <h5>Archery Range</h5>
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Archery/archery_standing_far.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Archery/archery_standing.JPG' %}" class="img-thumbnail">
+        </div>
+        <div class="col-4" >
+            <img src="{% static 'images/Archery/archery_walking.JPG' %}" class="img-thumbnail">
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock %}
