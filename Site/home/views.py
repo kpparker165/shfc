@@ -78,6 +78,12 @@ def purchase(request):
   return render(request, 'purchase.html', {'announcements': announcements})
 
 @login_required
+def purchasePowderValley(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  question = {} 
+  return render(request, 'purchasing/purchase_powder_valley.html', {'announcements': announcements})
+
+@login_required
 def workBond(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   question = {} 

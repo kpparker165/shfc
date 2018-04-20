@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^membership/$', views.membership, name='membership'),
     url(r'^save/$', views.save, name='save'),
     url(r'^purchase/$', views.purchase, name='purchase'),
+    url(r'^purchase/powder_valley/$', views.purchasePowderValley, name='purchasePowderValley'),
     url(r'^events/$', views.events, name='events'),
     url(r'^documents/$', views.documents, name='documents'),
     url(r'^updateAnnouncement/$', views.updateAnnouncement, name='updateAnnouncement'),

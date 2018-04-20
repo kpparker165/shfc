@@ -80,15 +80,17 @@
 	  				<a class="dropdown-item" href="{% url 'shfc:membership'%}">Membership</a>
 		    		{% if user.is_authenticated %}
 	  				<div class="dropdown-divider"></div>
-	  				<h6 class="dropdown-header">Perks</h6>
+	  				<h6 class="dropdown-header">Benefits</h6>
 	  				<a class="dropdown-item" href="{% url 'shfc:purchase'%}">Purchasing</a>
+	  				<a class="dropdown-item" href="{% url 'shfc:purchasePowderValley'%}">Powder Valley</a>
 	  				<div class="dropdown-divider"></div>
 	  				<h6 class="dropdown-header">Work Bonds</h6>
 	  				<a class="dropdown-item" href="{% url 'shfc:workBond'%}">Work Bond</a>
 	  				{% else %}
 	  				<div class="dropdown-divider"></div>
-	  				<h6 class="dropdown-header">Perks</h6>
+	  				<h6 class="dropdown-header">Benefits</h6>
 	  				<a class="dropdown-item disabled" href="{% url 'shfc:purchase'%}">Purchasing (login required)</a>
+	  				<a class="dropdown-item disabled" href="{% url 'shfc:purchasePowderValley'%}">Powder Valley (login required)</a>
 	  				<div class="dropdown-divider"></div>
 	  				<h6 class="dropdown-header disabled">Work Bonds</h6>
 	  				<a class="dropdown-item disabled" href="{% url 'shfc:workBond'%}">Work Bond (login required)</a>
@@ -140,8 +142,7 @@
       			<br>
       		{% endblock %}
       		<br>
-      		<br>
-      		<footer class="h-50 customDivs" style="color:white">
+      		<footer class="row customDivs" style="color:white">
 	      		<div class="row">
 	      			<div class="col-6 text-center">
 	      				<h4>Mailing Address</h4>
@@ -158,7 +159,15 @@
 	      				</address>
 	      			</div>
 	      			<div class="col-12 text-center">
-	      			Copyright &copy 2018 Skyline Hunting and Fishing Club
+		      			<a href="https://www.google.com/maps/place/39%C2%B031'29.5%22N+105%C2%B005'37.9%22W/@39.5248712,-105.1026118,2503m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x0:0x0!2zMznCsDMwJzMxLjkiTiAxMDXCsDA2JzI4LjkiVw!3b1!7e2!8m2!3d39.5088652!4d-105.1080265!3m5!1s0x0:0x0!7e2!8m2!3d39.5248716!4d-105.0938571"   target="_blank">
+		      				<img src="{% static 'images/google_map_location.png' %}" class="img-thumbnail" style="height:200px; width:200px"/>
+		      			</a>
+	      			</div>
+	      			<div class="col-12 text-center">
+	      				<br>
+	      				<p>
+	      					Copyright &copy 2018 Skyline Hunting and Fishing Club
+	      				</p>
 	      			</div>
 	      		</div> 
 	      	</footer>

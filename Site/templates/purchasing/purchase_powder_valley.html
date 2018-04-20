@@ -1,0 +1,149 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Powder Valley{% endblock %}
+{% block content %}
+{% block js %}
+
+<script type="text/javascript">
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+
+
+</script>
+
+{% endblock js%}
+
+
+<div class="col-12 customDivs">
+  <div class="col-12 text-center">
+    <h4>Powder Valley Order</h4>
+  </div>
+  <div class="col-12" style="overflow: auto; height:300px">
+    <table class="table table-striped table-bordered table-dark">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Item Number</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Pounds of Powder</th>
+          <th>Website Unit Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="word-wrap">999999</td>
+          <td style="word-wrap">Kyle</td>
+          <td style="word-wrap">Parker</td>
+          <td style="word-wrap">FEDGM215M</td>
+          <td style="word-wrap">FED GM215M LARGE RIFLE MAG MATCH PRIMERS </td>
+          <td style="word-wrap">1</td>
+          <td style="word-wrap">12</td>
+          <td style="word-wrap">$40.99</td>
+        </tr>
+        <tr>
+          <td style="word-wrap">999999</td>
+          <td style="word-wrap">Kyle</td>
+          <td style="word-wrap">Parker</td>
+          <td style="word-wrap">WSC3006SFU250</td>
+          <td style="word-wrap">30-06 SPRINGFIELD - PER 250 </td>
+          <td style="word-wrap">8</td>
+          <td style="word-wrap">1</td>
+          <td style="word-wrap">$25.99</td>
+        </tr>
+        <tr>
+          <td style="word-wrap">1102232</td>
+          <td style="word-wrap">Joe</td>
+          <td style="word-wrap">Smith</td>
+          <td style="word-wrap">WSC3006SFU250</td>
+          <td style="word-wrap">30-06 SPRINGFIELD - PER 250 </td>
+          <td style="word-wrap">8</td>
+          <td style="word-wrap">25</td>
+          <td style="word-wrap">$25.99</td>
+        </tr>
+        <tr>
+          <td style="word-wrap">123556</td>
+          <td style="word-wrap">John</td>
+          <td style="word-wrap">Doe</td>
+          <td style="word-wrap">WSC3006SFU250</td>
+          <td style="word-wrap">30-06 SPRINGFIELD - PER 250 </td>
+          <td style="word-wrap">8</td>
+          <td style="word-wrap">1</td>
+          <td style="word-wrap">$25.99</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div class="col-12 text-center">
+    <button class="btn btn-warning" onclick="exportTableToCSV('Powder_Valley_Order.csv')">Export Order to CSV</button>
+  </div>
+  <br>
+  <div class="col-12 text-center">
+    <form>
+      <h4>Add your powder to the order!</h4>
+      <div class="form-inline form-group">
+          <input type="text" class="form-control col-4 text-uppercase" id="inlineFormInputName2" placeholder="Item Number">
+          <input type="text" class="form-control col-8" id="inlineFormInputName2" placeholder="Description">
+      </div>
+      <div class="form-inline form-group">
+        <input type="number" min="0"class="form-control col-4" id="inlineFormInputName2" placeholder="Weight lbs ex. 8">
+        <input type="number" min="0" class="form-control col-4" id="inlineFormInputName2" placeholder="Quantity ex. 3">
+        <input type="number" step="0.01" min="0" class="form-control col-4" id="inlineFormInputName2" placeholder="Price Per Unit (ex. 25.99)">
+        <input type="text" class="form-control col-4" id="userNameField" value="{{user.username}}" readonly>
+      </div>
+      <div class="col-12">
+        <input type="submit" value="Submit Powder Order" class="form-control btn btn-success"/>
+      </div>
+    </form>
+  </div> 
+  <br>
+  
+</div>
+
+
+
+{% endblock %}
