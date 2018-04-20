@@ -36,12 +36,17 @@ def range(request):
 def marine(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   data = {}#SensorData.objects.all() 
-  return render(request, 'marine.html', {'announcements': announcements})
+  return render(request, 'marine/marine.html', {'announcements': announcements})
 
 def marineBoatInformation(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   data = {}#SensorData.objects.all() 
-  return render(request, 'marine_boat_information.html', {'announcements': announcements})
+  return render(request, 'marine/marine_boat_information.html', {'announcements': announcements})
+
+def marineBoatTrips(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  data = {}#SensorData.objects.all() 
+  return render(request, 'marine/marine_trips.html', {'announcements': announcements})
 
 #############
 #############
