@@ -7,7 +7,11 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^about/$', views.about, name='about'),
     url(r'^range/$', views.range, name='range'),
+
     url(r'^marine/$', views.marine, name='marine'),
+    url(r'^marine/boats_rentals_information/$', views.marineBoatInformation, name='marineBoatInformation'),
+    url(r'^marine/trips/$', views.marineBoatTrips, name='marineBoatTrips'),
+
     url(r'^membership/$', views.membership, name='membership'),
     url(r'^save/$', views.save, name='save'),
     url(r'^purchase/$', views.purchase, name='purchase'),
@@ -20,8 +24,6 @@ urlpatterns = [
     url(r'^management/rso/$', views.calendarManagementRSO, name='calendarManagementRSO'),
     url(r'^management/events/$', views.calendarManagementEVENTS, name='calendarManagementEVENTS'),
     url(r'^management/marine/$', views.calendarManagementMARINE, name='calendarManagementMARINE'),
-    url(r'^management/marine/boats_rentals_information/$', views.marineBoatInformation, name='marineBoatInformation'),
-    url(r'^management/marine/trips/$', views.marineBoatTrips, name='marineBoatTrips'),
     
     url(r'^management/announcement/$', views.calendarManagementANNOUNCEMENTS, name='calendarManagementANNOUNCEMENTS'),
     url(r'^createRSOCalendarEvent/$', views.createRSOCalendarEvent, name='createRSOCalendarEvent'),
