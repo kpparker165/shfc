@@ -1,0 +1,177 @@
+<!-- templates/home.html-->
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Events{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 customDivs">
+        <div class="col-12 text-center">
+            <h1>Marine </h1>
+            <h2>Boats/Rentals/Training</h2>
+        </div>
+        <br>
+        <div class="col-12 text-center">
+            <h4>Orientation</h4>
+        </div>
+        <div class="col-12">
+            Members shall participate in a boat orientation session prior to checking out a boat. Contact the boating chairman to arrange for a session. Frequent orientation opportunities are available with the chairman or one of the delegates.
+            <br>
+            <br>
+            Orientation sessions include:
+            <br>
+            Boater safety briefing based on Colorado boating statutes and regulations available at the following link.  A hard copy will also be provided at the orientation. The briefing emphasizes relevant information in sections #212, #218, #219 and #221.
+            <a href="http://cpw.state.co.us/thingstodo/Pages/BoatingRulesRegs.aspx"   target="_blank">
+                <b>
+                    http://cpw.state.co.us/thingstodo/Pages/BoatingRulesRegs.aspx
+                </b>
+            </a>
+        </div>
+        <br>
+    </div>
+</div>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-12 customDivs">
+        <br>
+        <div class="col-12 text-center">
+            <h4>Boat Checkout</h4>
+        </div>
+        <div class="col-12">
+            Members and guests shall sign a release and waiver of liabilities and return it to the boating chairman prior to checking out a boat.
+            <br>
+            <br>
+            Gary Keyser at 720-369-2784 or by email at <a href="mailto:l.gary.keyser@lmco.com">l.gary.keyser@lmco.com </a>
+            <br>
+            <br>
+            Instruction on equipment operation including a mandatory checkout cruise on the Crestliner and an optional checkout cruise on the Lund.
+            Rental fees are to be paid in advance with PayPal to <a href="mailto:shfcboat@gmail.com">shfcboat@gmail.com </a>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4>Waivers</h4>
+            </div>
+            <div class="col-6 text-center">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">
+                        <a href="{% static 'documents/marine/Facilities - Skyline Hunting and Fishing Club - 2018 Liability-Waiver Form --  boat usage  (MEMBER).pdf' %}" download>
+                            2018 Liability-Waiver Form --  boat usage  (MEMBER)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 text-center">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">
+                        <a href="{% static 'documents/marine/Facilities - Skyline Hunting and Fishing Club - 2018 Liability-Waiver Form --  boat usage (GUEST).pdf' %}" download>
+                            2018 Liability-Waiver Form --  boat usage (GUEST)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4>Checkout Forms and Checklists</h4>
+            </div>
+            <div class="col-6 text-center">
+                <h5>Crestliner</h5>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">
+                        <a href="{% static 'documents/marine/2018 Crestliner Checkout form_R0.pdf' %}" download>
+                            Crestliner Checkout Form
+                        </a>
+                        <br>
+                    </li>
+                    <li class="list-group-item list-group-item-dark">
+                        <a href="{% static 'documents/marine/SHFC Crestliner checklist.pdf' %}" download>
+                            Crestliner Checklist
+                        </a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 text-center">
+            <h5>Lund and Mirrocraft</h5>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-dark">
+                        <a href="{% static 'documents/marine/SHFC Lund,Mirrocraft checklist.pdf' %}" download>
+                            Lund, Mirrocraft Checklist
+                        </a>
+                        <br>
+                    </li>
+                    <li class="list-group-item list-group-item-dark">
+                        <a href="{% static 'documents/marine/2018 Lund, Mirrocraft Checkout form.pdf' %}" download>
+                            Lund, Mirrocraft Checkout Form
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>        
+<br>
+<br>
+<div class="row">
+    <div class="col-12 customDivs">
+    <br>
+        <div class="col-12 text-center">
+            <h4>Boat Rentals</h4>
+        </div>
+        <table class="table table-striped table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Motorized</th>
+                    <th>Location</th>
+                    <th>Rental Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>18’ Crestliner Sportfish 1850 </td>
+                    <td>Fishing Boat</td>
+                    <td>135 hp Mercury Optimax</td>
+                    <td>Slip at Chatfield Marina</td>
+                    <td>$30 full day / $20 half day</td>
+                </tr>
+                <tr>
+                    <td>16’ Lund WC-16</td>
+                    <td>Fishing Boat</td>
+                    <td>25 hp Mercury 4-stroke tiller motor</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>14’ Mirrocraft</td>
+                    <td>Fishing Boat</td>
+                    <td>electric trolling motor</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>Canoe 1</td>
+                    <td>Canoe </td>
+                    <td>Paddle</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>Canoe 2</td>
+                    <td>Canoe </td>
+                    <td>Paddle</td>
+                    <td>N/A</td>
+                    <td>NO</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+</div>
+
+{% endblock %}

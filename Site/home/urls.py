@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^management/rso/$', views.calendarManagementRSO, name='calendarManagementRSO'),
     url(r'^management/events/$', views.calendarManagementEVENTS, name='calendarManagementEVENTS'),
     url(r'^management/marine/$', views.calendarManagementMARINE, name='calendarManagementMARINE'),
+    url(r'^management/marine/boats_rentals_information/$', views.marineBoatInformation, name='marineBoatInformation'),
     
     url(r'^management/announcement/$', views.calendarManagementANNOUNCEMENTS, name='calendarManagementANNOUNCEMENTS'),
     url(r'^createRSOCalendarEvent/$', views.createRSOCalendarEvent, name='createRSOCalendarEvent'),

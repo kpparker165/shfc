@@ -44,9 +44,17 @@
 	  		<li class="nav-item">
 	  			<a class="nav-link" href="{% url 'shfc:range' %}">Ranges</a>
 		  	</li>
-	  		<li class="nav-item">
-	  			<a class="nav-link" href="{% url 'shfc:marine'%}">Marine</a>
-		  	</li>
+		  	<li class="nav-item dropdown">
+	  			<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'shfc:marine'%}" roll="button">Marine</a>
+		    	<div class="dropdown-menu">
+	  				<h6 class="dropdown-header">Boating Reservations</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:marine'%}">Calendar</a>
+	  				<div class="dropdown-divider"></div>
+	  				<h6 class="dropdown-header">Information</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:marineBoatInformation'%}">Boats/Rentals/Training</a>
+	  				<div class="dropdown-divider"></div>
+	  			</div>
+	  		</li>
 	  		<li class="nav-item">
 	  			<a class="nav-link" href="{% url 'shfc:events'%}">Events & Classes</a>
 		  	</li>

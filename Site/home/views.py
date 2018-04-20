@@ -26,11 +26,28 @@ def range(request):
   return render(request, 'range.html', {'announcements': announcements, 'rso_calendar_data':rso_calendar_data,\
     'rso_users_list':rso_users_list})
 
+
+##############
+##############
+# MARINE PAGE
+##############
+##############
+
 def marine(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   data = {}#SensorData.objects.all() 
   return render(request, 'marine.html', {'announcements': announcements})
 
+def marineBoatInformation(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  data = {}#SensorData.objects.all() 
+  return render(request, 'marine_boat_information.html', {'announcements': announcements})
+
+#############
+#############
+# MEMBERSHIP 
+#############
+#############
 def membership(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   data = {}#SensorData.objects.all() 
