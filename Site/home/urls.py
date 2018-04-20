@@ -14,16 +14,24 @@ urlpatterns = [
     url(r'^range/archery/$', views.rangeArchery, name='rangeArchery'),
     url(r'^range/images/$', views.rangeImages, name='rangeImages'),
 
+    # Marine
     url(r'^marine/$', views.marine, name='marine'),
     url(r'^marine/boats_rentals_information/$', views.marineBoatInformation, name='marineBoatInformation'),
     url(r'^marine/trips/$', views.marineBoatTrips, name='marineBoatTrips'),
 
     url(r'^membership/$', views.membership, name='membership'),
     url(r'^save/$', views.save, name='save'),
+
+    # Purchasing
     url(r'^purchase/$', views.purchase, name='purchase'),
     url(r'^purchase/powder_valley/$', views.purchasePowderValley, name='purchasePowderValley'),
+
+    # Events and classes
     url(r'^events/$', views.events, name='events'),
+    url(r'^events/classes/$', views.eventsClasses, name='eventsClasses'),
     url(r'^documents/$', views.documents, name='documents'),
+
+
     url(r'^updateAnnouncement/$', views.updateAnnouncement, name='updateAnnouncement'),
     url(r'^workBond/$', views.workBond, name='workBond'),
     # Calendars

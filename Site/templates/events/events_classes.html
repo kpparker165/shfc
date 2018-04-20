@@ -1,0 +1,185 @@
+<!-- templates/home.html-->
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SHFC-Events{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 customDivs">
+        <div class="col-12 text-center">
+            <h1>Events</h1>
+            <h2>Classes</h2>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+	<div class="col-12 customDivs">
+		<h3 class="text-center">Hunter Education Classes</h3>
+		<img src="{% static 'images/logos/logo-cpw.png' %}" class="rounded mx-auto d-block">
+		<p>
+			
+			All registration for the hunter ed classes is accomplished via the attached CPW web site. DO NOT contact any of the instructors to register. Contact Mitch Arnold @720-496-6106 and Bob Ventura @ 303-953-1966 if you have any questions regarding prerequisites, agenda, format, etc. All classes are conducted at the clubhouse located in the Lockheed Martin Recreational Center. Classes are open to the general public. Parents who already have a hunter ed card and are attending the class with their child do not need to register for the class.
+		</p>
+			<br>
+			<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+			<div id="accordion">
+				  <div class="card">
+				    <div class="card-header" id="headingOne">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				          Registration Links
+				        </button>
+				      </h5>
+				    </div>
+				    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+				     	<div class="card card-body">
+				     	<ul class="list-group">
+	  						<li class="list-group-item list-group-item-dark">
+						    	<a href="https://www.register-ed.com/programs/colorado?" target="_blank">All Courses</a>
+	  						</li>
+	  						<li class="list-group-item list-group-item-dark">
+								<a href="http://register-ed.com/programs/colorado/99-colorado-hunter-education-internet-conclusion-course" target="_blank">Hunter Education Course (Classroom)</a> 
+	  						</li>
+	  						<li class="list-group-item list-group-item-dark">
+								<a href="http://register-ed.com/programs/colorado/98-colorado-hunter-education-course">Hunter Education Course (Internet)</a>
+							</li>
+	  						<li class="list-group-item list-group-item-dark">
+								<a href="http://register-ed.com/programs/colorado/100-colorado-bowhunter-education-course">Hunter Education Course (Bowhunter)</a>
+								<br>
+								For a bowhunter ed course. Contact Mitch Arnold at 720-496-6106 for more information.
+	  						</li>
+	  						
+						</ul>
+  						</div>
+				    </div>
+				  </div>
+				  <div class="card">
+				    <div class="card-header" id="headingTwo">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				          2018 Archery Dates
+				        </button>
+				      </h5>
+				    </div>
+				    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+				     	<div class="card card-body">
+				     	<ul class="list-group">
+	  						<li class="list-group-item list-group-item-dark">Wednesday March 21 1800 to 2100</li>
+	  						<li class="list-group-item list-group-item-dark">Thursday March 22 1800 to 2100</li>
+	  						<li class="list-group-item list-group-item-dark">Saturday March 24 0730 to 1600 Class & Range</li>
+	  						<li class="list-group-item list-group-item-dark">Saturday June 2 0730 to 1600 Class & Range</li>
+	  						<li class="list-group-item list-group-item-dark">Saturday July 28 0730 to 1600 Class & Range</li>
+						</ul>
+						</div>
+				    </div>
+				  </div>
+				  <div class="card">
+				    <div class="card-header" id="headingThree">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				          2018 Rifle Dates
+				        </button>
+				      </h5>
+				    </div>
+				    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+				     	<div class="card card-body">
+				    	<ul class="list-group">
+	  						<li class="list-group-item list-group-item-dark">Saturday Feb 24 0730 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Saturday March 17 0730 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Saturday April 14 0730 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Saturday May 19 0730 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Tuesday June 19 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Wednesday June 20 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Thursday June 21 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Saturday June 23 0900 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Tuesday July 17 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Wednesday July 18 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Thursday July 19 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Saturday July 21 0900 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Tuesday August 14 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Wednesday August 15 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Thursday August 16 1800 to 2100</li>
+							<li class="list-group-item list-group-item-dark">Saturday August 18 0900 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Saturday September 22 0730 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Saturday October 20 0730 to 1200</li>
+							<li class="list-group-item list-group-item-dark">Saturday November 17 0730 to 1200</li>
+	  					</ul>
+	  				</div>
+				      
+				    </div>
+				  </div>
+				</div>
+				</div>
+			<div class="col-2"></div>
+			</div>
+		<br>
+		<div class="col-12 bg-info customDivs text-center">
+			<b>
+			    <h5>Cost</h5>
+			    $10 per student
+			   	<br>
+			   	Additional fee apply to students taking the classroom portion on the internet.
+			</b>
+			<br>
+		</div> 
+		<br>
+	</div>
+	<div class="col-12 customDivs">
+		
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-12 customDivs">
+		<h3 class="text-center">NRA Classes</h3>
+		<img src="{% static 'images/logos/logo-nra.png' %}" class="rounded mx-auto d-block">
+		<p>
+			NRA Class Schedule for Basic and Concealed Carry Now Available. The club has loaded our next NRA Basic Pistol (BP) and Personal Protection in the Home (PPITH) classes into the NRA system for tracking completions. The same format of a Thursday or Friday evening to accomplish the classroom portion, Saturday or Sunday range and a following weeknight for completion. 
+		</p>
+		<br>
+		<div class="col-12 bg-info customDivs text-center">
+			<b>
+			    <h5>Cost</h5>
+				$50 for members and family.
+				<br>
+				$75 for nonmembers and guests.
+			</b>
+			<br>
+		</div> 
+		<br>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-12 customDivs">
+		<h3 class="text-center">Home Firearm Safety Class</h3>
+		<img src="{% static 'images/logos/logo-hunter_education.png' %}" class="rounded mx-auto d-block">
+		<div>
+			Home Firearm Safety Classes are held on the second off Friday of each month at the clubhouse at 5 pm only if someone RSVP for the class.  Contact Gene per info below to RSVP.  The class is ~4 hours long.  Range session is typically the Saturday or Sunday following the class and is decided during the classroom session and may not be listed in the event calendar.
+			<br>
+			<br>
+			We will hold an optional range session, date to be announced at the class, for any class participants that may want to develop their range skills and familiarization.
+			<br>
+			<br>
+			Just as the class is open to all, the range session is open to any previous class participants who'd like to reorient themselves to the basic requirements and range protocols.
+			<br>
+			<br>
+			Please contact Gene Adamson, 303-667-2871, if you need HFS class or have questions.
+		</div>
+		<br>
+		<div class="col-12 bg-info customDivs text-center">
+			<b>
+			    <h5>Cost</h5>
+				The class is free and members are encouraged to bring anyone that they may want to bring to the range in the future
+			</b>
+			<br>
+		</div> 
+		<br>
+	</div>
+</div>
+<br>
+{% endblock %}

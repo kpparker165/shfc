@@ -70,9 +70,14 @@
 	  				<a class="dropdown-item" href="{% url 'shfc:marineBoatTrips'%}">Boating Trips</a>
 	  			</div>
 	  		</li>
-	  		<li class="nav-item">
-	  			<a class="nav-link" href="{% url 'shfc:events'%}">Events & Classes</a>
-		  	</li>
+		  	<li class="nav-item dropdown">
+	  			<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'shfc:range'%}" roll="button">Events and Classes</a>
+		    	<div class="dropdown-menu">
+		    		<h6 class="dropdown-header">Events</h6>
+	  				<a class="dropdown-item" href="{% url 'shfc:events'%}">Calendar</a>
+	  				<a class="dropdown-item" href="{% url 'shfc:eventsClasses'%}">Classes</a>
+	  			</div>
+	  		</li>
 		  	<li class="nav-item dropdown">
 	  			<a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{% url 'shfc:membership'%}" roll="button">Membership</a>
 		    	<div class="dropdown-menu">

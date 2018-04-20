@@ -112,12 +112,25 @@ def about(request):
   question = {}
   return render(request, 'about.html', {'announcements': announcements})
 
-
+########
+########
+# EVENTS
+########
+########
 def events(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   question = {} 
   return render(request, 'events.html', {'announcements': announcements})
   
+def eventsClasses(request):
+  announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
+  question = {} 
+  return render(request, 'events/events_classes.html', {'announcements': announcements})
+  
+
+
+
+
 def documents(request):
   announcements = NewAnnouncement.objects.all().order_by('-announcement_date')[:20]
   question = {} 
